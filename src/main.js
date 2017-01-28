@@ -104,28 +104,29 @@ function LittlePoring(game, spritesheet) {
     this.animation = new Animation(spritesheet, 64, 66, 4, 0.15, 4, true, 1);
 	this.x = 0;
 	this.y = 319;
+	this.speed = 4;
 	this.direction = "E";
 	this.game = game;
     this.ctx = game.ctx;
 }
 
 LittlePoring.prototype.draw = function () {
-	if (this.game.moving) {
-		if (this.game.direction === "N") {
-		    this.y -= 4;
-		} else if (this.game.direction === "W") {
-		    this.x -= 4;
-		} else if (this.game.direction === "S") {
-		    this.y += 4;
-		} else if (this.game.direction === "E") {
-		    this.x += 4;
-		}
-	}
+
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 5, 1, 1);
 }
 
 LittlePoring.prototype.update = function () {
-
+	if (this.game.moving) {
+		if (this.game.direction === "N" && this.y - this.speed > 0) {
+		    this.y -= this.speed;
+		} else if (this.game.direction === "W" && this.x - this.speed > 0) {
+		    this.x -= this.speed;
+		} else if (this.game.direction === "S" && this.y + this.speed < 638) {
+		    this.y += this.speed;
+		} else if (this.game.direction === "E" && this.x + this.speed < 1216) {
+		    this.x += this.speed;
+		}
+	}
 }
 
 AM.queueDownload("./img/ProjectUtumno.png");
