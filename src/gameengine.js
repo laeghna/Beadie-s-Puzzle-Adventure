@@ -58,7 +58,7 @@ GameEngine.prototype.startInput = function () {
         console.log(e);
         console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
     }, false);
-
+/*
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         that.click = getXandY(e);
         console.log(e);
@@ -76,22 +76,41 @@ GameEngine.prototype.startInput = function () {
         that.wheel = e;
         console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
     }, false);
-
+*/
     this.ctx.canvas.addEventListener("keydown", function (e) {
         console.log(e);
         console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
+		
+		that.moving = true;
+		
+		if (e.code === "KeyW" || e.code === "ArrowUp") {
+			that.direction = "N";
+		} else if (e.code === "KeyA" || e.code === "ArrowLeft") {
+			that.direction = "W";
+		} else if (e.code === "KeyS" || e.code === "ArrowDown") {
+			that.direction = "S";
+		} else if (e.code === "KeyD" || e.code === "ArrowRight") {
+			that.direction = "E";
+		}
+		
+		e.preventDefault();
     }, false);
-
+/*
     this.ctx.canvas.addEventListener("keypress", function (e) {
         if (e.code === "KeyD") that.d = true;
         that.chars[e.code] = true;
         console.log(e);
         console.log("Key Pressed Event - Char " + e.charCode + " Code " + e.keyCode);
     }, false);
-
+*/
     this.ctx.canvas.addEventListener("keyup", function (e) {
         console.log(e);
         console.log("Key Up Event - Char " + e.code + " Code " + e.keyCode);
+		
+		if (e.code === "KeyW" || e.code === "ArrowUp" || e.code === "KeyA" || e.code === "ArrowLeft" || 
+		    e.code === "KeyS" || e.code === "Arrow Down" || e.code === "KeyD" || e.code === "Arrow Right") {
+			that.moving = false;
+		}
     }, false);
 
     console.log('Input started');

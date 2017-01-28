@@ -3,14 +3,14 @@ var AM = new AssetManager();
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
     this.spriteSheet = spriteSheet;
     this.frameWidth = frameWidth;
-    this.frameDuration = frameDuration;
     this.frameHeight = frameHeight;
     this.sheetWidth = sheetWidth;
+    this.frameDuration = frameDuration;
     this.frames = frames;
-    this.totalTime = frameDuration * frames;
-    this.elapsedTime = 0;
     this.loop = loop;
     this.scale = scale;
+    this.totalTime = frameDuration * frames;
+    this.elapsedTime = 0;
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y, rowStart, xScale, yScale) {
@@ -44,8 +44,6 @@ Animation.prototype.isDone = function () {
 
 // no inheritance
 function Background(game, spritesheet) {
-    this.xinit = 0;
-    this.yinit = 0;
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
@@ -93,7 +91,7 @@ Background.prototype.draw = function () {
            }
            this.ctx.drawImage(this.spritesheet,
                    xsource,ysource,this.tsize,this.tsize,
-                   this.xinit + c * this.tsize, this.yinit + r * this.tsize,
+                   c * this.tsize, r * this.tsize,
                    this.tsize, this.tsize);
         }
     }
@@ -106,19 +104,28 @@ function LittlePoring(game, spritesheet) {
     this.animation = new Animation(spritesheet, 64, 66, 4, 0.15, 4, true, 1);
 	this.x = 0;
 	this.y = 319;
-    this.speed = 70;
+	this.direction = "E";
 	this.game = game;
     this.ctx = game.ctx;
 }
 
 LittlePoring.prototype.draw = function () {
+	if (this.game.moving) {
+		if (this.game.direction === "N") {
+		    this.y -= 4;
+		} else if (this.game.direction === "W") {
+		    this.x -= 4;
+		} else if (this.game.direction === "S") {
+		    this.y += 4;
+		} else if (this.game.direction === "E") {
+		    this.x += 4;
+		}
+	}
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 5, 1, 1);
 }
 
 LittlePoring.prototype.update = function () {
-    if (this.animation.elapsedTime < this.animation.totalTime * 8 / 14)
-        this.x += this.game.clockTick * this.speed;
-    if (this.x > 1280) this.x = -64;
+
 }
 
 AM.queueDownload("./img/ProjectUtumno.png");
