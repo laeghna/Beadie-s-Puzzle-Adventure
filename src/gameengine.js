@@ -81,16 +81,18 @@ GameEngine.prototype.startInput = function () {
         console.log(e);
         console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
 		
-		that.moving = true;
-		
 		if (e.code === "KeyW" || e.code === "ArrowUp") {
 			that.direction = "N";
+            that.moving = true;
 		} else if (e.code === "KeyA" || e.code === "ArrowLeft") {
 			that.direction = "W";
+            that.moving = true;
 		} else if (e.code === "KeyS" || e.code === "ArrowDown") {
 			that.direction = "S";
+            that.moving = true;
 		} else if (e.code === "KeyD" || e.code === "ArrowRight") {
 			that.direction = "E";
+            that.moving = true;
 		}
 		
 		e.preventDefault();
