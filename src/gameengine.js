@@ -80,7 +80,7 @@ GameEngine.prototype.startInput = function () {
     this.ctx.canvas.addEventListener("keydown", function (e) {
         console.log(e);
         console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
-		
+
 		if (e.code === "KeyW" || e.code === "ArrowUp") {
 			that.direction = "N";
             that.moving = true;
@@ -94,7 +94,7 @@ GameEngine.prototype.startInput = function () {
 			that.direction = "E";
             that.moving = true;
 		}
-		
+
 		e.preventDefault();
     }, false);
 /*
@@ -108,11 +108,13 @@ GameEngine.prototype.startInput = function () {
     this.ctx.canvas.addEventListener("keyup", function (e) {
         console.log(e);
         console.log("Key Up Event - Char " + e.code + " Code " + e.keyCode);
-		
-		if (e.code === "KeyW" || e.code === "ArrowUp" || e.code === "KeyA" || e.code === "ArrowLeft" || 
-		    e.code === "KeyS" || e.code === "Arrow Down" || e.code === "KeyD" || e.code === "Arrow Right") {
+
+		if (e.code === "KeyW" || e.code === "ArrowUp" || e.code === "KeyA" || e.code === "ArrowLeft" ||
+		    e.code === "KeyS" || e.code === "ArrowDown" || e.code === "KeyD" || e.code === "ArrowRight") {
 			that.moving = false;
 		}
+
+    e.preventDefault();
     }, false);
 
     console.log('Input started');
