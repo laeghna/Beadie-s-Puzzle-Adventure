@@ -217,22 +217,22 @@ Background.prototype.update = function () {
 };
 
 
-function LittlePoring(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 64, 66, 4, 0.15, 4, true, 1);
+function Poring(game, spritesheet) {
+    this.animation = new Animation(spritesheet, 42, 42, 8, 0.15, 8, true, 1);
 	this.x = 0;
 	this.y = 319;
-	this.speed = 4;
+	this.speed = 1;
 	this.direction = "E";
 	this.game = game;
     this.ctx = game.ctx;
 }
 
-LittlePoring.prototype.draw = function () {
+Poring.prototype.draw = function () {
 
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 5, 1, 1);
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y, 2, 1, 1);
 }
 
-LittlePoring.prototype.update = function () {
+Poring.prototype.update = function () {
 	if (this.game.moving) {
 		if (this.game.direction === "N" && this.y - this.speed > 0) {
 		    this.y -= this.speed;
@@ -247,7 +247,7 @@ LittlePoring.prototype.update = function () {
 }
 
 AM.queueDownload("./img/ProjectUtumno.png");
-AM.queueDownload("./img/tinyPoring.png");
+AM.queueDownload("./img/poring.png");
 
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max-min + 1)) + min;
@@ -262,7 +262,7 @@ AM.downloadAll(function () {
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/ProjectUtumno.png")));
-		gameEngine.addEntity(new LittlePoring(gameEngine, AM.getAsset("./img/tinyPoring.png")));	
+		gameEngine.addEntity(new Poring(gameEngine, AM.getAsset("./img/poring.png")));	
 
     console.log("All Done!");
 });
