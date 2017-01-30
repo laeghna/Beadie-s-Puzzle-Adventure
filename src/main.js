@@ -43,6 +43,12 @@ Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }
 
+Animation.prototype.changeAnimation = function (frameStart, frames) {
+    this.frameAdjust = frameStart;
+    this.totalTime = this.frameDuration * frames;
+    this.elapsedTime = 0;
+}
+
 // no inheritance
 function Background(game, spritesheet) {
     this.spritesheet = spritesheet;
@@ -240,7 +246,7 @@ Background.prototype.update = function () {
 
 function Poring(game, spritesheet) {
     
-    this.animation = new Animation(spritesheet, E_START_IDLE, CHAR_W, CHAR_H, SHEET_W, 0.15, IDLE_FRAME_COUNT, true, 1);
+    this.animation = new Animation(spritesheet, E_START_STAND, CHAR_W, CHAR_H, SHEET_W, 0.15, IDLE_FRAME_COUNT, true, 1);
 	this.x = 0;
 	this.y = 319;
 	this.speed = 1;
@@ -259,77 +265,74 @@ Poring.prototype.draw = function () {
 Poring.prototype.update = function () {
     
     if (this.game.moving != this.moving || this.game.direction != this.direction) {
+        
         this.statusChanged = true;
         this.moving = this.game.moving;
         this.direction = this.game.direction;
     }
-    
-	if (this.moving) { 
+
+    if (this.moving) { 
         
-		if (this.direction === "N" && this.y - this.speed > 0) {
+        this.idleTimer = 1;
+           
+       if (this.direction === "N" && this.y - this.speed > 0) {
             
-		    this.y -= SPEED;
+            this.y -= SPEED;
             if (this.statusChanged) {
-                this.animation = new Animation(this.animation.spriteSheet, N_START_WALK, CHAR_W, CHAR_H, SHEET_W, 0.15, WALK_FRAME_COUNT, true, 1);
+                this.animation.changeAnimation(N_START_WALK, WALK_FRAME_COUNT);
                 this.statusChanged = false;
             }
             
-		} else if (this.direction === "W" && this.x - this.speed > 0) {
+        } else if (this.direction === "W" && this.x - this.speed > 0) {
             
-		    this.x -= SPEED;
+            this.x -= SPEED;
             if (this.statusChanged) {
-                this.animation = new Animation(this.animation.spriteSheet, W_START_WALK, CHAR_W, CHAR_H, SHEET_W, 0.15, WALK_FRAME_COUNT, true, 1);
+                this.animation.changeAnimation(W_START_WALK, WALK_FRAME_COUNT);
                 this.statusChanged = false;
             }
             
-		} else if (this.direction === "S" && this.y + this.speed < 638) {
+        } else if (this.direction === "S" && this.y + this.speed < 638) {
             
-		    this.y += SPEED;
-            if (this.game.statusChanged) {
-                this.animation = new Animation(this.animation.spriteSheet, E_START_WALK, CHAR_W, CHAR_H, SHEET_W, 0.15, WALK_FRAME_COUNT, true, 1);
-                this.statusChanged = false;
-            }
-            
-		} else if (this.direction === "E" && this.x + this.speed < 1216) {
-            
-		    this.x += SPEED;
+            this.y += SPEED;
             if (this.statusChanged) {
-                this.animation = new Animation(this.animation.spriteSheet, E_START_WALK, CHAR_W, CHAR_H, SHEET_W, 0.15, WALK_FRAME_COUNT, true, 1);
+                this.animation.changeAnimation(S_START_WALK, WALK_FRAME_COUNT);
                 this.statusChanged = false;
             }
-		}
-	} else {
+            
+        } else if (this.direction === "E" && this.x + this.speed < 1216) {
+            
+            this.x += SPEED;
+            if (this.statusChanged) {
+                this.animation.changeAnimation(E_START_WALK, WALK_FRAME_COUNT);
+                this.statusChanged = false;
+            }
+        }
+            
+    } else {
         
-        switch(this.direction) {
+        if (this.statusChanged) {
+            switch(this.direction) {
+        
+                case "N":
+                    this.animation.changeAnimation(N_START_STAND, IDLE_FRAME_COUNT);
+                    this.statusChanged = false;
+                    break;
             
-            case "N":
-                if (this.statusChanged) {
-                    this.animation = new Animation(this.animation.spriteSheet, N_START_IDLE, CHAR_W, CHAR_H, 8, 0.15, IDLE_FRAME_COUNT, true, 1);
+                case "W":
+                    this.animation.changeAnimation(W_START_STAND, IDLE_FRAME_COUNT);
                     this.statusChanged = false;
-                }
-                break;
-                
-            case "W":
-                if (this.statusChanged) {
-                    this.animation = new Animation(this.animation.spriteSheet, W_START_IDLE, CHAR_W, CHAR_H, 8, 0.15, IDLE_FRAME_COUNT, true, 1);
+                    break;
+            
+                case "S":
+                    this.animation.changeAnimation(S_START_STAND, IDLE_FRAME_COUNT);
                     this.statusChanged = false;
-                }
-                break;
-                
-            case "S":
-                if (this.statusChanged) {
-                    this.animation = new Animation(this.animation.spriteSheet, E_START_IDLE, CHAR_W, CHAR_H, 8, 0.15, IDLE_FRAME_COUNT, true, 1);
+                    break;
+            
+                case "E":
+                    this.animation.changeAnimation(E_START_STAND, IDLE_FRAME_COUNT);
                     this.statusChanged = false;
-                }
-                break;
-                
-            case "E":
-                this.animation.frameAdjust = E_START_IDLE; 
-                if (this.statusChanged) {
-                    this.animation = new Animation(this.animation.spriteSheet, E_START_IDLE, CHAR_W, CHAR_H, 8, 0.15, IDLE_FRAME_COUNT, true, 1);
-                    this.statusChanged = false;
-                }
-                break;
+                    break;
+            }
         }  
     }
 }

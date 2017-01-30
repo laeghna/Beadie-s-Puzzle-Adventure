@@ -3,13 +3,20 @@ SHEET_W = 8;
 
 //Character sprite sheet index starting positions
 //where count starts at zero
-var N_START_IDLE = 24;
-var W_START_IDLE = 0;
-var E_START_IDLE = 4;
+var N_START_STAND = 24;
+var W_START_STAND = 0;
+var S_START_STAND = 48;
+var E_START_STAND = 4;
 
 var N_START_WALK = 32;
 var W_START_WALK = 8;
+var S_START_WALK = 56;
 var E_START_WALK = 16;
+
+var N_START_IDLE = 28;
+var W_START_IDLE = 40;
+var S_START_IDLE = 52;
+var E_START_IDLE = 44;
 
 //Frame count for character animations
 var IDLE_FRAME_COUNT = 4;
@@ -21,3 +28,9 @@ CHAR_H = 42;
 
 //Character movement speed
 var SPEED = 1;
+
+//Count for when to start idle animation
+var START_IDLE_COUNT = 40;
+
+//Count for idle animation duration
+var IDLE_COUNT = 20;
