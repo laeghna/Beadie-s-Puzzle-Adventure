@@ -20,7 +20,9 @@ var E_START_IDLE = 44;
 
 //Frame count for character animations
 var IDLE_FRAME_COUNT = 4;
-var WALK_FRAME_COUNT = 8;
+var WALK_FRAME_COUNT = 4;
+
+var PORING_FRAME_DURATION = .12
 
 //Character frame size
 CHAR_W = 42;

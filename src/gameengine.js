@@ -52,7 +52,6 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     // event listeners are added here
-
     this.ctx.canvas.addEventListener("click", function (e) {
         that.click = getXandY(e);
         console.log(e);
