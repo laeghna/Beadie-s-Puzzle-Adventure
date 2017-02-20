@@ -245,7 +245,7 @@ Background.prototype.update = function () {
 
 
 function Poring(game, spritesheet) {
-    this.animation = new Animation(spritesheet, E_START_STAND, CHAR_W, CHAR_H, SHEET_W, PORING_FRAME_DURATION, IDLE_FRAME_COUNT, true, 1);
+    this.animation = new Animation(spritesheet, E_START_STAND, CHAR_W, CHAR_H, SHEET_W, PORING_FRAME_DURATION, IDLE_FRAME_COUNT, true, .75);
 	  this.x = 0;
 	  this.y = 319;
 	  this.speed = 1;
