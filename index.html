@@ -2,16 +2,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Beadie's Puzzle Adventure</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <!-- for FF, Chrome, Opera -->
+    <link rel="icon" type = "image/png" href="img/poringIcon16.png" size="16x16" />
+    <link rel="icon" type = "image/png" href="img/poringIcon32.png" size="32x32" />
 </head>
 <body>
-    <canvas id="gameWorld" tabindex="1" width="1280" height="704" style="border: 1px solid brown; background: mintcream">
-    Please upgrade your browser to support HTML5.
-	</canvas>
-    <script type="text/javascript" src="./src/gameengine.js"></script>
-    <script type="text/javascript" src="./src/assetmanager.js"></script>
-    <script type="text/javascript" src="./src/main.js"></script>
-    <script type="text/javascript" src="./src/constants.js"></script>
+    <div id="canvas-holder">
+        <div id="controls">
+                    <div id="clickToPlay" class="clickToPlay"><img src="img/play.png" onclick="startGame()" /></div>
+        </div>
+        
+        <canvas id="gameWorld" tabindex="1" width="1280" height="704" style="background: mintcream">
+        Please upgrade your browser to support HTML5.
+	    </canvas>
+        <script type="text/javascript" src="./src/gameengine.js"></script>
+        <script type="text/javascript" src="./src/assetmanager.js"></script>
+        <script type="text/javascript" src="./src/main.js"></script>
+        <script type="text/javascript" src="./src/redWorld.js"></script>
+        <script type="text/javascript" src="./src/orangeWorld.js"></script>
+        <script type="text/javascript" src="./src/yellowWorld.js"></script>
+        <script type="text/javascript" src="./src/greenWorld.js"></script>
+        <script type="text/javascript" src="./src/blueWorld.js"></script>
+        <script type="text/javascript" src="./src/violetWorld.js"></script>
+        <script type="text/javascript" src="./src/crystalWorld.js"></script>
+        <script type="text/javascript" src="./src/constants.js"></script>
+    </div>
 </body>
 </html>
