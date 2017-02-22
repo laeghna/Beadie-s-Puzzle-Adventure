@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+#canvas-holder{
+    margin: 10px auto 0px auto;
+    width: 1280px;
+    height: 704px;
+    border: 1px solid brown;
+}
+
+body{
+background-color: #dee2d5;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+}
+
+
+#controls{
+    width: 1280px;
+    margin-top: 595px;
+    z-index: 2;
+    position: absolute;
+    /*border: 1px solid;*/
+}
+
+.clickToPlay{
+    opacity: 0.5;
+    float: left;
+    position: relative;
+    right: -23%;
+    display: none;
+}
+
+.clickToPlay:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.menu{
+    opacity: 0.5;
+    width: 100px;
+    margin: 500px 0px 0px 640px;
+    /*border: 1px solid;*/
+}
+
+.menu:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+img{
+    cursor: pointer;
+}
+
+#text{
+    width: 500px;
+    margin: 40px auto 0px auto;
+}
