@@ -58,9 +58,8 @@ function startGame () {
 function Background(game, img) {
     this.tileset = AM.getAsset("./img/ProjectUtumno.png");
     this.scene = "red";
-    this.world = redWorld;
+    this.world = crystalWorld;
     this.world.tiles = this.world.background;
-    console.log(this.world.redTrailY);
     this.game = game;
     this.img = img;
     this.ctx = game.ctx;
@@ -133,8 +132,8 @@ Background.prototype.update = function () {
 
 function Poring(game, spritesheet) {
     this.animation = new Animation(spritesheet, E_START_STAND, CHAR_W, CHAR_H, SHEET_W, PORING_FRAME_DURATION, IDLE_FRAME_COUNT, true, .75);
-    this.x = 0;
-    this.y = 319;
+    this.x = (canvas.width - CHAR_W) / 2;
+    this.y = (canvas.height - CHAR_H) / 2;
     this.speed = 1;
     this.direction = "E";
     this.moving = false;
