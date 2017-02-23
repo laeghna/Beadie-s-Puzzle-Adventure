@@ -22,7 +22,6 @@ background-color: #dee2d5;
 
 #controls{
     width: 1280px;
-    margin-top: 595px;
     z-index: 2;
     position: absolute;
     /*border: 1px solid;*/
@@ -30,13 +29,104 @@ background-color: #dee2d5;
 
 .clickToPlay{
     opacity: 0.5;
-    float: left;
-    position: relative;
-    right: -23%;
+    position: absolute;
+    left: 300px;
+    top: 595px;
     display: none;
 }
 
 .clickToPlay:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.redWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 320px;
+    top: 64px;
+    display: none;
+}
+
+.redWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.orangeWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 160px;
+    top: 320px;
+    display: none;
+}
+
+.orangeWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.yellowWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 320px;
+    top: 576px;
+    display: none;
+}
+
+.yellowWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.greenWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 896px;
+    top: 576px;
+    display: none;
+}
+
+.greenWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.blueWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 1056px;
+    top: 320px;
+    display: none;
+}
+
+.blueWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.violetWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 896px;
+    top: 64px;
+    display: none;
+}
+
+.violetWorldPortal:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.crystalWorldPortal{
+    opacity: 0.5;
+    position: absolute;
+    left: 1088px;
+    top: 320px;
+    display: none;
+}
+
+.crystalWorldPortal:hover{
     opacity: 1;
     cursor: pointer;
 }

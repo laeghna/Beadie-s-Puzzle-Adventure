@@ -50,14 +50,41 @@ Animation.prototype.changeAnimation = function (frameStart, frames) {
 }
 
 function startGame () {
-    canvas.scene = "red";
+    canvas.scene = "crystal";
     clickToPlay.style.display = "none";
+    togglePortals();
+}
+
+function changeScene (scene) {
+    canvas.scene = scene;
+    canvas.worldChanged = true;
+    
+    togglePortals();
+}
+
+function togglePortals () {
+    if (canvas.scene === "crystal") {
+        redWorldPortal.style.display = "inline";
+        orangeWorldPortal.style.display = "inline";
+        yellowWorldPortal.style.display = "inline";
+        greenWorldPortal.style.display = "inline";
+        blueWorldPortal.style.display = "inline";
+        violetWorldPortal.style.display = "inline";
+        crystalWorldPortal.style.display = "none";
+    } else {
+        redWorldPortal.style.display = "none";
+        orangeWorldPortal.style.display = "none";
+        yellowWorldPortal.style.display = "none";
+        greenWorldPortal.style.display = "none";
+        blueWorldPortal.style.display = "none";
+        violetWorldPortal.style.display = "none";
+        crystalWorldPortal.style.display = "inline";
+    }
 }
 
 // no inheritance
 function Background(game, img) {
     this.tileset = AM.getAsset("./img/ProjectUtumno.png");
-    this.scene = "red";
     this.world = crystalWorld;
     this.world.tiles = this.world.background;
     this.game = game;
@@ -90,10 +117,9 @@ Background.prototype.draw = function () {
 Background.prototype.update = function () {
     
     if (canvas.scene != "intro") {
-        if (this.worldChanged) {
+        if (canvas.worldChanged) {
 
-            this.world.clear();
-            switch(this.scene) {
+            switch(canvas.scene) {
                 
                 case "crystal":
                     this.world = crystalWorld;
@@ -123,6 +149,10 @@ Background.prototype.update = function () {
                     this.world = violetWorld;
                     break;
             }
+            
+            this.world.clear();
+            canvas.worldChanged = false;
+            
         } else {
             this.world.update(this.cols, this.rows);
         }
@@ -247,6 +277,7 @@ function getRandomInt(min, max) {
 AM.downloadAll(function () {
     this.canvas = document.getElementById("gameWorld");
     this.canvas.scene = "intro";
+    this.canvas.worldChanged = false;
     var ctx = this.canvas.getContext("2d");
     
     clickToPlay.style.display = "inline";
