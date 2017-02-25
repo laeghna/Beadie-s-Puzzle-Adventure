@@ -94,7 +94,10 @@ function changeScene (scene) {
             CURR_WORLD_TILES = violetWorld.background;
             break;
     }
-
+    
+    hero.x = 0;
+    hero.y = (canvas.height - CHAR_H) / 2;
+    hero.direction = "E";
     canvas.world.clear();
     togglePortals();
 }
@@ -362,8 +365,10 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
 
+    this.hero = new Poring(gameEngine, AM.getAsset("./img/poring.png"));
+    
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
-    gameEngine.addEntity(new Poring(gameEngine, AM.getAsset("./img/poring.png")));
+    gameEngine.addEntity(hero);
 
     console.log("All Done!");
 });
