@@ -62,42 +62,53 @@ function changeScene (scene) {
         case "crystal":
             canvas.world = crystalWorld;
             CURR_WORLD_TILES = crystalWorld.background;
+            hero.x = (canvas.width - CHAR_W) / 2;
+            hero.direction = "S";
             break;
 
         case "red":
             canvas.world = redWorld;
             CURR_WORLD_TILES = redWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
 
         case "orange":
             canvas.world = orangeWorld;
             CURR_WORLD_TILES = orangeWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
 
         case "yellow":
             canvas.world = yellowWorld;
             CURR_WORLD_TILES = yellowWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
 
         case "green":
             canvas.world = greenWorld;
             CURR_WORLD_TILES = greenWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
 
         case "blue":
             canvas.world = blueWorld;
             CURR_WORLD_TILES = blueWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
 
         case "violet":
             canvas.world = violetWorld;
             CURR_WORLD_TILES = violetWorld.background;
+            hero.x = 0;
+            hero.direction = "E";
             break;
     }
     
-    hero.x = 0;
-    hero.y = (canvas.height - CHAR_H) / 2;
-    hero.direction = "E";
     canvas.world.clear();
     togglePortals();
 }
@@ -194,7 +205,7 @@ function Poring(game, spritesheet) {
     this.x = (canvas.width - CHAR_W) / 2;
     this.y = (canvas.height - CHAR_H) / 2;
     this.speed = 1;
-    this.direction = "E";
+    this.direction = "S";
     this.moving = false;
     this.statusChanged = false;
     this.game = game;
