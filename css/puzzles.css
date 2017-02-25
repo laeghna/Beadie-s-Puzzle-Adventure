@@ -1,0 +1,77 @@
+.puzzle1{
+    opacity: 0.5;
+    position: absolute;
+    left: 160px;
+    top: 64px;
+    display: none;
+}
+
+.puzzle1:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.puzzle2{
+    opacity: 0.5;
+    position: absolute;
+    left: 480px;
+    top: 64px;
+    display: none;
+}
+
+.puzzle2:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.puzzle3{
+    opacity: 0.5;
+    position: absolute;
+    left: 800px;
+    top: 64px;
+    display: none;
+}
+
+.puzzle3:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.puzzle4{
+    opacity: 0.5;
+    position: absolute;
+    left: 160px;
+    top: 576px;
+    display: none;
+}
+
+.puzzle4:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.puzzle5{
+    opacity: 0.5;
+    position: absolute;
+    left: 480px;
+    top: 576px;
+    display: none;
+}
+
+.puzzle5:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.puzzle6{
+    opacity: 0.5;
+    position: absolute;
+    left: 800px;
+    top: 576px;
+    display: none;
+}
+
+.puzzle6:hover{
+    opacity: 1;
+    cursor: pointer;
+}
