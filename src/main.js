@@ -200,7 +200,7 @@ Poring.prototype.update = function () {
     var okToMoveN = true, okToMoveS = true, okToMoveE = true, okToMoveW = true;
 
     function getTile(x, y) {
-      return CURR_WORLD_TILES[pixelToTile(x) + (pixelToTile(y) * 40)];
+      return CURR_WORLD_TILES[getPos(x, y)];
     }
 
     function getPos(x,y) {
