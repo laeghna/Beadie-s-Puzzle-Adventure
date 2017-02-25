@@ -61,32 +61,32 @@ function changeScene (scene) {
 
         case "crystal":
             canvas.world = crystalWorld;
-            CURR_WORLD_TILES = crystalWorld.background;
+            // CURR_WORLD_TILES = crystalWorld.background;
             break;
 
         case "red":
             canvas.world = redWorld;
-            CURR_WORLD_TILES = redWorld.background;
+            // CURR_WORLD_TILES = redWorld.background;
             break;
 
         case "orange":
             canvas.world = orangeWorld;
-            CURR_WORLD_TILES = orangeWorld.background;
+            // CURR_WORLD_TILES = orangeWorld.background;
             break;
 
         case "yellow":
             canvas.world = yellowWorld;
-            CURR_WORLD_TILES = yellowWorld.background;
+            // CURR_WORLD_TILES = yellowWorld.background;
             break;
 
         case "green":
             canvas.world = greenWorld;
-            CURR_WORLD_TILES = greenWorld.background;
+            // CURR_WORLD_TILES = greenWorld.background;
             break;
 
         case "blue":
             canvas.world = blueWorld;
-            CURR_WORLD_TILES = blueWorld.background;
+            // CURR_WORLD_TILES = blueWorld.background;
             break;
 
         case "violet":
