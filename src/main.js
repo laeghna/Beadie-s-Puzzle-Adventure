@@ -57,9 +57,53 @@ function startGame () {
 
 function changeScene (scene) {
     canvas.scene = scene;
-    canvas.worldChanged = true;
+    switch(canvas.scene) {
 
+        case "crystal":
+            canvas.world = crystalWorld;
+            CURR_WORLD_TILES = crystalWorld.background;
+            break;
+
+        case "red":
+            canvas.world = redWorld;
+            CURR_WORLD_TILES = redWorld.background;
+            break;
+
+        case "orange":
+            canvas.world = orangeWorld;
+            CURR_WORLD_TILES = orangeWorld.background;
+            break;
+
+        case "yellow":
+            canvas.world = yellowWorld;
+            CURR_WORLD_TILES = yellowWorld.background;
+            break;
+
+        case "green":
+            canvas.world = greenWorld;
+            CURR_WORLD_TILES = greenWorld.background;
+            break;
+
+        case "blue":
+            canvas.world = blueWorld;
+            CURR_WORLD_TILES = blueWorld.background;
+            break;
+
+        case "violet":
+            canvas.world = violetWorld;
+            CURR_WORLD_TILES = violetWorld.background;
+            break;
+    }
+
+    hero.x = 0;
+    hero.y = (canvas.height - CHAR_H) / 2;
+    hero.direction = "E";
+    canvas.world.clear();
     togglePortals();
+}
+
+function displayPuzzle (num) {
+
 }
 
 function togglePortals () {
@@ -71,6 +115,12 @@ function togglePortals () {
         blueWorldPortal.style.display = "inline";
         violetWorldPortal.style.display = "inline";
         crystalWorldPortal.style.display = "none";
+        puzzle1.style.display = "none";
+        puzzle2.style.display = "none";
+        puzzle3.style.display = "none";
+        puzzle4.style.display = "none";
+        puzzle5.style.display = "none";
+        puzzle6.style.display = "none";
     } else {
         redWorldPortal.style.display = "none";
         orangeWorldPortal.style.display = "none";
@@ -78,15 +128,23 @@ function togglePortals () {
         greenWorldPortal.style.display = "none";
         blueWorldPortal.style.display = "none";
         violetWorldPortal.style.display = "none";
-        crystalWorldPortal.style.display = "inline";
+
+        if (!canvas.puzzle) {
+            crystalWorldPortal.style.display = "inline";
+            puzzle1.style.display = "inline";
+            puzzle2.style.display = "inline";
+            puzzle3.style.display = "inline";
+            puzzle4.style.display = "inline";
+            puzzle5.style.display = "inline";
+            puzzle6.style.display = "inline";
+        }
     }
 }
 
 // no inheritance
 function Background(game, img) {
     this.tileset = AM.getAsset("./img/ProjectUtumno.png");
-    this.world = crystalWorld;
-    this.world.tiles = this.world.background;
+    canvas.world.tiles = canvas.world.background;
     this.game = game;
     this.img = img;
     this.ctx = game.ctx;
@@ -103,7 +161,7 @@ Background.prototype.draw = function () {
         for(var c = 0; c < this.cols; c++) {
             for(var r = 0; r < this.rows; r++) {
 
-                var tile = this.world.getTile(r * this.cols + c);
+                var tile = canvas.world.getTile(r * this.cols + c);
 
                 this.ctx.drawImage(this.tileset,
                     tile.x, tile.y, this.tile.w, this.tile.h,
@@ -119,51 +177,12 @@ Background.prototype.draw = function () {
 Background.prototype.update = function () {
 
     if (canvas.scene != "intro") {
-        if (canvas.worldChanged) {
+        if (canvas.puzzle) {
 
-            switch(canvas.scene) {
-
-                case "crystal":
-                    this.world = crystalWorld;
-                    CURR_WORLD_TILES = crystalWorld.background;
-                    break;
-
-                case "red":
-                    this.world = redWorld;
-                    CURR_WORLD_TILES = redWorld.background;
-                    break;
-
-                case "orange":
-                    this.world = orangeWorld;
-                    CURR_WORLD_TILES = orangeWorld.background;
-                    break;
-
-                case "yellow":
-                    this.world = yellowWorld;
-                    CURR_WORLD_TILES = yellowWorld.background;
-                    break;
-
-                case "green":
-                    this.world = greenWorld;
-                    CURR_WORLD_TILES = greenWorld.background;
-                    break;
-
-                case "blue":
-                    this.world = blueWorld;
-                    CURR_WORLD_TILES = blueWorld.background;
-                    break;
-
-                case "violet":
-                    this.world = violetWorld;
-                    CURR_WORLD_TILES = violetWorld.background;
-                    break;
-            }
-
-            this.world.clear();
-            canvas.worldChanged = false;
+            //Stuff here for puzzles
 
         } else {
-            this.world.update(this.cols, this.rows);
+            canvas.world.update(this.cols, this.rows);
         }
     }
 };
@@ -195,12 +214,10 @@ Poring.prototype.draw = function () {
 
 Poring.prototype.update = function () {
 
-    // var lebg = this.world.tiles;
-
     var okToMoveN = true, okToMoveS = true, okToMoveE = true, okToMoveW = true;
 
     function getTile(x, y) {
-      return CURR_WORLD_TILES[getPos(x, y)];
+      return canvas.world.background[pixelToTile(x) + (pixelToTile(y) * 40)];
     }
 
     function getPos(x,y) {
@@ -286,6 +303,15 @@ Poring.prototype.update = function () {
                 }
             }
 
+            var jumpDistance = this.animation.elapsedTime / this.animation.totalTime;
+            var totalHeight = 2;
+
+            if (jumpDistance > 0.6)
+                jumpDistance = -(1 - jumpDistance);
+
+
+            this.height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
+
         } else {
 
             if (this.statusChanged) {
@@ -313,15 +339,6 @@ Poring.prototype.update = function () {
                 }
             }
         }
-
-        var jumpDistance = this.animation.elapsedTime / this.animation.totalTime;
-        var totalHeight = 2;
-
-        if (jumpDistance > 0.6)
-            jumpDistance = -(1 - jumpDistance);
-
-
-        this.height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
     }
 }
 
@@ -349,6 +366,8 @@ function getRandomInt(min, max) {
 AM.downloadAll(function () {
     this.canvas = document.getElementById("gameWorld");
     this.canvas.scene = "intro";
+    this.canvas.puzzle = false;
+    this.canvas.world = crystalWorld;
     this.canvas.worldChanged = false;
     var ctx = this.canvas.getContext("2d");
 
@@ -358,8 +377,10 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
 
+    this.hero = new Poring(gameEngine, AM.getAsset("./img/poring.png"));
+
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
-    gameEngine.addEntity(new Poring(gameEngine, AM.getAsset("./img/poring.png")));
+    gameEngine.addEntity(hero);
 
     console.log("All Done!");
 });
