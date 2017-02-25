@@ -325,6 +325,18 @@ Poring.prototype.update = function () {
     }
 }
 
+function getNonoTile(x, y) {
+  //return arrayforthenonog[getNonoX][getNonoY];
+}
+//use this for getting X and Y.
+function pixelToTile(n) {
+//  return Math.floor(n/<insert the rows of the nonograms>);
+} // pixel-to-tile conversion
+
+function tileToPixel(n) {
+  //return (n * width of each tile);
+} // tile-to-pixel conversion
+
 
 AM.queueDownload("./img/title.png");
 AM.queueDownload("./img/ProjectUtumno.png");
