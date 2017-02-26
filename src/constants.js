@@ -45,3 +45,5 @@ var TILE_H = 32;
 
 //Acceptable tiles array
 var OK_TILES = [0];
+
+var CURR_WORLD_TILES = crystalWorld.background;
