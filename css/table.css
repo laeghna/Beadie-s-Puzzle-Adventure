@@ -1,0 +1,55 @@
+td {
+	width: 40px;
+	height: 40px;
+	border: 1px black solid
+}
+
+th {
+}
+
+.black {
+	background-color: black
+}
+
+.empty {
+	height: auto;
+	width: auto;
+	border: none
+}
+
+.correct {
+	color: green
+}
+
+.flag{
+    background-color:white;
+    position:relative;
+}
+
+.flag:before, .flag:after{
+    content:'';
+    position:absolute;
+    width:40px;
+    height:1px;
+    background-color:black;
+    top:20px;
+}
+
+.flag:before{
+    transform:rotate(45deg);
+}
+.flag:after{
+    transform:rotate(-45deg);
+}
+
+span[class^=cell] {
+	display: block
+}
+
+th[class^=cell] {
+	vertical-align: bottom
+}
+
+th[class^=row] {
+	text-align: right
+}

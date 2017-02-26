@@ -1,5 +1,9 @@
 var AM = new AssetManager();
 
+$("#puzzle").on("click", "td", function(e) {
+    e.target.solveToggleClass();
+})
+
 function Animation(spriteSheet, frameStart, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
     this.spriteSheet = spriteSheet;
     this.frameAdjust = frameStart;
@@ -102,7 +106,61 @@ function changeScene (scene) {
 }
 
 function displayPuzzle (num) {
+    //document.getElementById("puzzleCanvas").style.zIndex = "2";
+    canvas.playingPuzzle = true;
+    canvas.puzzleNum = num;
+    canvas.style.visibility = "hidden";
+    //document.getElementById("puzzle").style.zIndex = "2";
+    togglePortals();
 
+                switch(canvas.scene) {
+
+                case "red":
+
+                    switch(canvas.puzzleNum) {
+
+                        case 1:
+                            console.log(redPuzzle1.clueRows);
+                            solvePuzzle("puzzle", eval(redPuzzle1));
+                        case 2:
+                            solvePuzzle("puzzle", redPuzzle2);
+                        case 3:
+                            solvePuzzle("puzzle", redPuzzle3);
+                        case 4:
+                            solvePuzzle("puzzle", redPuzzle4);
+                        case 5:
+                            solvePuzzle("puzzle", redPuzzle5);
+                        case 6:
+                            solvePuzzle("puzzle", redPuzzle1);
+                    }
+                    break;
+
+                case "orange":
+                    //Stuff
+                    break;
+
+                case "yellow":
+                    //Yeah, More Stuff
+                    break;
+
+                case "green":
+                    //Even More Stuff
+                    break;
+
+                case "blue":
+                    //Will the Stuff Never End?!
+                    break;
+
+                case "violet":
+                    //Finnally, the Last Stuff
+                    break;
+            }
+}
+
+function removePuzzle () {
+    document.getElementById("puzzleCanvas").style.zIndex = "-1";
+    canvas.playingPuzzle = false;
+    togglePortals();
 }
 
 function togglePortals () {
@@ -128,7 +186,16 @@ function togglePortals () {
         blueWorldPortal.style.display = "none";
         violetWorldPortal.style.display = "none";
 
-        if (!canvas.puzzle) {
+
+        if (canvas.playingPuzzle) {
+            crystalWorldPortal.style.display = "none";
+            puzzle1.style.display = "none";
+            puzzle2.style.display = "none";
+            puzzle3.style.display = "none";
+            puzzle4.style.display = "none";
+            puzzle5.style.display = "none";
+            puzzle6.style.display = "none";
+        } else {
             crystalWorldPortal.style.display = "inline";
             puzzle1.style.display = "inline";
             puzzle2.style.display = "inline";
@@ -156,6 +223,8 @@ Background.prototype.draw = function () {
 
     if (canvas.scene == "intro") {
         this.ctx.drawImage(this.img, 0, 10, 1280, 732);
+    } else if (canvas.playingPuzzle) {
+        //Do nothing
     } else {
         for(var c = 0; c < this.cols; c++) {
             for(var r = 0; r < this.rows; r++) {
@@ -171,14 +240,11 @@ Background.prototype.draw = function () {
     }
 };
 
-
-
 Background.prototype.update = function () {
 
     if (canvas.scene != "intro") {
-        if (canvas.puzzle) {
-
-            //Stuff here for puzzles
+        if (canvas.playingPuzzle) {
+            //this.ctx.
 
         } else {
             canvas.world.update(this.cols, this.rows);
@@ -353,9 +419,10 @@ function getRandomInt(min, max) {
 AM.downloadAll(function () {
     this.canvas = document.getElementById("gameWorld");
     this.canvas.scene = "intro";
-    this.canvas.puzzle = false;
+    this.canvas.playingPuzzle = false;
+    this.canvas.puzzleNum = 0;
+    this.canvas.puzzle = {};
     this.canvas.world = crystalWorld;
-    this.canvas.worldChanged = false;
     var ctx = this.canvas.getContext("2d");
 
     clickToPlay.style.display = "inline";
