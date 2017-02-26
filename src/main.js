@@ -91,11 +91,16 @@ function changeScene (scene) {
             canvas.world = violetWorld;
             break;
     }
+    if (canvas.world != crystalWorld) {
+      hero.x = 0;
+      hero.y = (canvas.height - CHAR_H) / 2;
+      hero.direction = "E";
+      canvas.world.clear();
 
-    hero.x = 0;
-    hero.y = (canvas.height - CHAR_H) / 2;
-    hero.direction = "E";
-    canvas.world.clear();
+    } else {
+      hero.x = (canvas.width - CHAR_H) / 2;
+      hero.y = (canvas.height - CHAR_H) / 2;
+    }
     togglePortals();
 }
 
