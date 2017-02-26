@@ -65,40 +65,33 @@ function changeScene (scene) {
 
         case "crystal":
             canvas.world = crystalWorld;
-            CURR_WORLD_TILES = crystalWorld.background;
             break;
 
         case "red":
             canvas.world = redWorld;
-            CURR_WORLD_TILES = redWorld.background;
             break;
 
         case "orange":
             canvas.world = orangeWorld;
-            CURR_WORLD_TILES = orangeWorld.background;
             break;
 
         case "yellow":
             canvas.world = yellowWorld;
-            CURR_WORLD_TILES = yellowWorld.background;
             break;
 
         case "green":
             canvas.world = greenWorld;
-            CURR_WORLD_TILES = greenWorld.background;
             break;
 
         case "blue":
             canvas.world = blueWorld;
-            CURR_WORLD_TILES = blueWorld.background;
             break;
 
         case "violet":
             canvas.world = violetWorld;
-            CURR_WORLD_TILES = violetWorld.background;
             break;
     }
-    
+
     hero.x = 0;
     hero.y = (canvas.height - CHAR_H) / 2;
     hero.direction = "E";
@@ -113,13 +106,13 @@ function displayPuzzle (num) {
     canvas.style.visibility = "hidden";
     //document.getElementById("puzzle").style.zIndex = "2";
     togglePortals();
-    
+
                 switch(canvas.scene) {
 
                 case "red":
-                    
+
                     switch(canvas.puzzleNum) {
-                    
+
                         case 1:
                             console.log(redPuzzle1.clueRows);
                             this.solvePuzzle("puzzle", redPuzzle1);
@@ -135,23 +128,23 @@ function displayPuzzle (num) {
                             solvePuzzle("puzzle", redPuzzle1);
                     }
                     break;
-                
+
                 case "orange":
                     //Stuff
                     break;
-                
+
                 case "yellow":
                     //Yeah, More Stuff
                     break;
-                
+
                 case "green":
                     //Even More Stuff
                     break;
-                
+
                 case "blue":
                     //Will the Stuff Never End?!
                     break;
-                
+
                 case "violet":
                     //Finnally, the Last Stuff
                     break;
@@ -186,7 +179,7 @@ function togglePortals () {
         greenWorldPortal.style.display = "none";
         blueWorldPortal.style.display = "none";
         violetWorldPortal.style.display = "none";
-        
+
         if (canvas.playingPuzzle) {
             crystalWorldPortal.style.display = "none";
             puzzle1.style.display = "none";
@@ -245,7 +238,7 @@ Background.prototype.update = function () {
     if (canvas.scene != "intro") {
         if (canvas.playingPuzzle) {
             //this.ctx.
-            
+
         } else {
             canvas.world.update(this.cols, this.rows);
         }
@@ -367,14 +360,14 @@ Poring.prototype.update = function () {
                     this.statusChanged = false;
                 }
             }
-            
+
             var jumpDistance = this.animation.elapsedTime / this.animation.totalTime;
             var totalHeight = 2;
-            
+
             if (jumpDistance > 0.6)
                 jumpDistance = -(1 - jumpDistance);
-            
-            
+
+
             this.height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
 
         } else {
@@ -432,7 +425,7 @@ AM.downloadAll(function () {
     gameEngine.start();
 
     this.hero = new Poring(gameEngine, AM.getAsset("./img/poring.png"));
-    
+
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
     gameEngine.addEntity(hero);
 
