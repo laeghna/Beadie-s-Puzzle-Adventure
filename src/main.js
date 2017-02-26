@@ -61,45 +61,44 @@ function changeScene (scene) {
 
         case "crystal":
             canvas.world = crystalWorld;
-            // CURR_WORLD_TILES = crystalWorld.background;
             break;
 
         case "red":
             canvas.world = redWorld;
-            // CURR_WORLD_TILES = redWorld.background;
             break;
 
         case "orange":
             canvas.world = orangeWorld;
-            // CURR_WORLD_TILES = orangeWorld.background;
             break;
 
         case "yellow":
             canvas.world = yellowWorld;
-            // CURR_WORLD_TILES = yellowWorld.background;
             break;
 
         case "green":
             canvas.world = greenWorld;
-            // CURR_WORLD_TILES = greenWorld.background;
             break;
 
         case "blue":
             canvas.world = blueWorld;
-            // CURR_WORLD_TILES = blueWorld.background;
             break;
 
         case "violet":
             canvas.world = violetWorld;
-            CURR_WORLD_TILES = violetWorld.background;
             break;
     }
 
-    hero.x = 0;
-    hero.y = (canvas.height - CHAR_H) / 2;
-    hero.direction = "E";
-    canvas.world.clear();
-    togglePortals();
+    if (canvas.world != crystalWorld) {
+      hero.x = 0;
+      hero.y = (canvas.height - CHAR_H) / 2;
+      hero.direction = "E";
+      canvas.world.clear();
+      togglePortals();
+    } else {
+      hero.x = (canvas.width - CHAR_H) / 2;
+      hero.y = (canvas.height - CHAR_H) / 2;
+    }
+
 }
 
 function displayPuzzle (num) {
@@ -342,18 +341,6 @@ Poring.prototype.update = function () {
     }
 }
 
-function getNonoTile(x, y) {
-  //return arrayforthenonog[getNonoX][getNonoY];
-}
-//use this for getting X and Y.
-function pixelToTile(n) {
-//  return Math.floor(n/<insert the rows of the nonograms>);
-} // pixel-to-tile conversion
-
-function tileToPixel(n) {
-  //return (n * width of each tile);
-} // tile-to-pixel conversion
-
 
 AM.queueDownload("./img/title.png");
 AM.queueDownload("./img/ProjectUtumno.png");
@@ -381,6 +368,5 @@ AM.downloadAll(function () {
 
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
     gameEngine.addEntity(hero);
-
     console.log("All Done!");
 });
