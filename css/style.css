@@ -27,6 +27,16 @@ background-color: #dee2d5;
     /*border: 1px solid;*/
 }
 
+#gameWorld{
+    position: absolute;
+    z-index: 1;
+}
+
+#puzzleCanvas{
+    position: absolute;
+    z-index: -1;
+}
+
 .clickToPlay{
     opacity: 0.5;
     position: absolute;

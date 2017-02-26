@@ -5,16 +5,26 @@
     <title>Beadie's Puzzle Adventure</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/worlds.css">
+    <link rel="stylesheet" type="text/css" href="css/puzzles.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
     
     <!-- for FF, Chrome, Opera -->
     <link rel="icon" type = "image/png" href="img/poringIcon16.png" size="16x16" />
     <link rel="icon" type = "image/png" href="img/poringIcon32.png" size="32x32" />
+        <script type="text/javascript" src="./src/zepto.min.js"></script>
 </head>
 <body>
     <div id="canvas-holder">
         <div id="controls">
                     <div id="clickToPlay" class="clickToPlay"><img src="img/play.png" onclick="startGame()" /></div>
                     <div id="redWorldPortal" class="redWorldPortal"><img src="img/portal.png" onclick="changeScene('red')" /></div>
+                        <div id="puzzle1" class="puzzle1"><img src="img/portal.png" onclick="displayPuzzle(1)" /></div>
+                        <div id="puzzle2" class="puzzle2"><img src="img/portal.png" onclick="displayPuzzle(2)" /></div>
+                        <div id="puzzle3" class="puzzle3"><img src="img/portal.png" onclick="displayPuzzle(3)" /></div>
+                        <div id="puzzle4" class="puzzle4"><img src="img/portal.png" onclick="displayPuzzle(4)" /></div>
+                        <div id="puzzle5" class="puzzle5"><img src="img/portal.png" onclick="displayPuzzle(5)" /></div>
+                        <div id="puzzle6" class="puzzle6"><img src="img/portal.png" onclick="displayPuzzle(6)" /></div>
                     <div id="orangeWorldPortal" class="orangeWorldPortal"><img src="img/portal.png" onclick="changeScene('orange')" /></div>
                     <div id="yellowWorldPortal" class="yellowWorldPortal"><img src="img/portal.png" onclick="changeScene('yellow')" /></div>
                     <div id="greenWorldPortal" class="greenWorldPortal"><img src="img/portal.png" onclick="changeScene('green')" /></div>
@@ -38,6 +48,12 @@
         <script type="text/javascript" src="./src/violetWorld.js"></script>
         <script type="text/javascript" src="./src/crystalWorld.js"></script>
         <script type="text/javascript" src="./src/constants.js"></script>
+        
+
+            <table id="puzzle"></table>
+            <span id="clueObject"></span>
+        <script type="text/javascript" src="./src/redWorldPuzzles.js"></script>
+        <script type="text/javascript" src="./src/nonogram.js"></script>
     </div>
 </body>
 </html>
