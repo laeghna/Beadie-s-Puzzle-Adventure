@@ -65,42 +65,53 @@ function changeScene (scene) {
 
         case "crystal":
             canvas.world = crystalWorld;
+            hero.x = (canvas.width - CHAR_H) / 2;
+            hero.y = (canvas.height - CHAR_H) / 2;
             break;
 
         case "red":
             canvas.world = redWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "orange":
             canvas.world = orangeWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "yellow":
             canvas.world = yellowWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "green":
             canvas.world = greenWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "blue":
             canvas.world = blueWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "violet":
             canvas.world = violetWorld;
+            hero.x = 0;
+            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
     }
-    if (canvas.world != crystalWorld) {
-      hero.x = 0;
-      hero.y = (canvas.height - CHAR_H) / 2;
-      hero.direction = "E";
-      canvas.world.clear();
-
-    } else {
-      hero.x = (canvas.width - CHAR_H) / 2;
-      hero.y = (canvas.height - CHAR_H) / 2;
-    }
+    canvas.world.clear();
     togglePortals();
 }
 
