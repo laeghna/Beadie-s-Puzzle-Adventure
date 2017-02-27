@@ -1,7 +1,8 @@
-function Puzzle(game, puzzle, cellSize){
+function Puzzle(game, puzzle, cellSize) {
+    this.game = game;
     this.cellSize = cellSize;
-    this.screen_width = puzzle.width * cellSize;
-    this.screen_height = puzzle.height * cellSize;
+    this.grid_width = puzzle.width * cellSize;
+    this.grid_height = puzzle.height * cellSize;
     this.cellsHorizontal = puzzle.width;
     this.cellsVertical = puzzle.height;
     this.undoBuffer = []
@@ -14,9 +15,10 @@ function Puzzle(game, puzzle, cellSize){
     this.columnsFilled = puzzle.clueCols;
     
     this.ctx = game.ctx;
+    this.mouseClicked = false;
 }
 
-Puzzle.prototype.buildGrid = function(){
+Puzzle.prototype.buildGrid = function() {
     var grid = [];
     
     for(var i = 0; i < this.cellsVertical; i++){
@@ -32,24 +34,24 @@ Puzzle.prototype.buildGrid = function(){
 
 Puzzle.prototype.draw = function() {
     if (gameCanvas.playingPuzzle) {
-        this.ctx.clearRect(0, 0, this.screen_width, this.screen_height);
+        this.ctx.clearRect(0, 0, this.grid_width, this.grid_height);
     this.ctx.fillStyle = "rgba(34,34,34, 0.2)";
-    this.ctx.fillRect(0, 0, this.screen_width, this.screen_height);
+    this.ctx.fillRect(0, 0, this.grid_width, this.grid_height);
         
     // Draw grid lines
     if(!this.gridComplete()){
         for(var i = 0; i <= this.grid.length; i++){
-            this.drawLine(0, i*this.cellSize, this.screen_width, i*this.cellSize, "#1F1F1F", 1);
+            this.drawLine(0, i*this.cellSize, this.grid_width, i*this.cellSize, "#1F1F1F", 1);
             if(i % 5 == 0){
-                this.drawLine(0, i*this.cellSize, this.screen_width, i*this.cellSize, "#1F1F1F", 3);
+                this.drawLine(0, i*this.cellSize, this.grid_width, i*this.cellSize, "#1F1F1F", 3);
             }
         }
         
         for(var i = 0; i <= this.grid[0].length; i++){
-            this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.screen_height, "#1F1F1F", 1);
+            this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 1);
             if(i % 5 == 0){
                 console.log("ssd");
-                this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.screen_height, "#1F1F1F", 3);
+                this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 3);
             }
         }
     }
@@ -64,14 +66,14 @@ Puzzle.prototype.draw = function() {
         for(var j = 0; j < this.linesFilled[i].length; j++){
             hint += this.linesFilled[i][j] + "    ";
         }
-        this.ctx.fillText(hint, this.screen_width + 10, this.cellSize * ( i + 1 ) - 7);
+        this.ctx.fillText(hint, this.grid_width + 10, this.cellSize * ( i + 1 ) - 7);
     }
     
     // Column hints    
     for(var i = 0; i < this.columnsFilled.length; i++){
         for(var j = 0; j < this.columnsFilled[i].length; j++){
             hint = this.columnsFilled[i][j];
-            this.ctx.fillText(hint, this.cellSize * i + 5, this.screen_height + this.cellSize * ( j + 1 ) + 7);
+            this.ctx.fillText(hint, this.cellSize * i + 5, this.grid_height + this.cellSize * ( j + 1 ) + 7);
         }
     }
     
@@ -94,7 +96,7 @@ Puzzle.prototype.draw = function() {
     }
 }
 
-Puzzle.prototype.alreadyClicked = function(row, col){
+Puzzle.prototype.alreadyClicked = function(row, col) {
     switch(this.clickAction){
         case "ERASE":
             return this.grid[row][col] == 0;
@@ -105,12 +107,10 @@ Puzzle.prototype.alreadyClicked = function(row, col){
     }
 }
 
-Puzzle.prototype.click = function(x, y){
-    col = Math.floor(x/this.cellSize);
-    row = Math.floor(y/this.cellSize);
-    if(this.isValidLocation(x, y) && !this.alreadyClicked(row, col)){
+Puzzle.prototype.click = function(row, col) {
+    if(this.isValidLocation(row, col) && !this.alreadyClicked(row, col)){
         
-        this.undoBuffer.push([[x,y], this.grid[row][col]]);
+        this.undoBuffer.push([[row, col], this.grid[row][col]]);
         
         switch(this.clickAction){
             case "ERASE":
@@ -126,8 +126,8 @@ Puzzle.prototype.click = function(x, y){
     }
 }
 
-Puzzle.prototype.isValidLocation = function(x, y){
-    return (x >= 0 && x < this.screen_width && y >=0 && y < this.screen_height);
+Puzzle.prototype.isValidLocation = function(y, x) {
+    return (x >= 0 && x * this.cellSize < this.grid_width && y >=0 && y * this.cellSize < this.grid_height);
 }
 
 Puzzle.prototype.drawLine = function(startx, starty, endx, endy, color, line_width){
@@ -139,44 +139,31 @@ Puzzle.prototype.drawLine = function(startx, starty, endx, endy, color, line_wid
     this.ctx.stroke();
 }
 
-Puzzle.prototype.render = function(){
-    
-    
-}
-
-Puzzle.prototype.tileAt = function(x, y){
-    var col = Math.floor(x/this.cellSize);
-    var row = Math.floor(y/this.cellSize);
-    
-    return this.grid[row][col];
-}
-
-Puzzle.prototype.undo = function(){
+Puzzle.prototype.undo = function() {
     if(this.undoBuffer.length == 0){
         return;
     }
     var action = this.undoBuffer.pop();
-    var x = action[0][0];
-    var y = action[0][1];
+    var row = action[0][0];
+    var col = action[0][1];
     var prevState = action[1];
-    
-    var col = Math.floor(x/this.cellSize);
-    var row = Math.floor(y/this.cellSize);
     
     this.grid[row][col] = prevState;
 }
 
-Puzzle.prototype.setClickAction = function(x, y){
-    switch(this.tileAt(x, y)){
-        case 0:
-            this.clickAction = "PAINT";
-            break;
-        case 1:
-            this.clickAction = "BLOCK";
-            break;
-        case 2:
-            this.clickAction = "ERASE";
-            break;
+Puzzle.prototype.setClickAction = function(row, col){
+    if (this.isValidLocation(row, col)) {
+        switch(this.grid[row][col]){
+            case 0:
+                this.clickAction = "PAINT";
+                break;
+            case 1:
+                this.clickAction = "BLOCK";
+                break;
+            case 2:
+                this.clickAction = "ERASE";
+                break;
+        }
     }
 }
 
@@ -192,8 +179,8 @@ Puzzle.prototype.gridComplete = function() {
 }
 
 Puzzle.prototype.changePuzzle = function() {
-    this.screen_width = gameCanvas.puzzle.width * this.cellSize;
-    this.screen_height = gameCanvas.puzzle.height * this.cellSize;
+    this.grid_width = gameCanvas.puzzle.width * this.cellSize;
+    this.grid_height = gameCanvas.puzzle.height * this.cellSize;
     this.cellsHorizontal = gameCanvas.puzzle.width;
     this.cellsVertical = gameCanvas.puzzle.height;
     this.undoBuffer = []
@@ -210,65 +197,11 @@ Puzzle.prototype.update = function(){
         this.changePuzzle();
         gameCanvas.puzzleChanged = false;
     }
-    /*
-    var mousePressed = false;
     
-    function mouseDown(e){
-        mousePressed = true;
-        this.setClickAction(e.x, e.y);
+    if (this.game.mouseClicked) {
+        console.log(this.game.mouse.x + ", " + this.game.mouse.y);
+        this.setClickAction(this.game.mouse.y, this.game.mouse.x);
+        this.click(this.game.mouse.y, this.game.mouse.x);
+        this.game.mouseClicked = false;
     }
-    
-    function mouseDrag(e){
-        if(mousePressed){
-            this.click(e.x, e.y);
-        }
-    }
-    
-    function mouseUp(e){
-        mousePressed = false;
-        this.click(e.x, e.y);
-    }
-    
-    keys = {
-        z: false,
-        ctrl: false
-    };
-    
-    function keyDown(e){
-        if (event.keyCode == 90) {
-            keys["z"] = true;
-        } else if (event.keyCode == 17) {
-            keys["ctrl"] = true;
-        }
-
-        if(keys["z"] && keys["ctrl"]){
-            this.undo();    
-        }
-    }
-    
-    function keyUp(e){
-        if (event.keyCode == 90) {
-            keys["z"] = false;
-        } else if (event.keyCode == 17) {
-            keys["ctrl"] = false;
-        }
-    }
-    
-    document.addEventListener('mousedown', mouseDown, false);
-    document.addEventListener('mousemove', mouseDrag, false);
-    document.addEventListener('mouseup', mouseUp, false);
-    document.addEventListener('keydown', keyDown, false);
-    document.addEventListener('keyup', keyUp, false);
-    /*
-    setInterval(
-        function(){
-            this.update();
-            this.render();
-            
-            
-            //if(this.gridComplete()){
-            //  console.log("GRID COMPLETE :D");
-            //  return;
-            //}
-    }, 100)*/
 }

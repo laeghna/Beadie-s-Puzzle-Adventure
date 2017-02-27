@@ -52,10 +52,12 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     // event listeners are added here
- /*   this.ctx.canvas.addEventListener("click", function (e) {
-        that.click = getXandY(e);
-        console.log(e);
+    this.ctx.canvas.addEventListener("click", function (e) {
+        that.mouse = getXandY(e);
+        //console.log(e);
         console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
+        
+        that.mouseClicked = true;
     }, false);
 /*
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
@@ -63,13 +65,14 @@ GameEngine.prototype.startInput = function () {
         console.log(e);
         console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
         e.preventDefault();
-    }, false);*/
-
+    }, false);
+*/
     this.ctx.canvas.addEventListener("mouseDown", function(e) {
-        console.log(e);
+        //console.log(e);
+        console.log("Mouse Down Event - Char " + e.code + " Code " + e.keyCode);
         that.mouse = getXandY(e);
         
-        that.mouseDown = true;
+        that.mousePressed = true;
         
         e.preventDefault();
     }, false);
@@ -78,7 +81,7 @@ GameEngine.prototype.startInput = function () {
         console.log(e);
         that.mouse = getXandY(e);
         
-        that.mouseDown = false;
+        that.mousePressed = false;
         
         e.preventDefault();
     }, false);
