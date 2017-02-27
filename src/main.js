@@ -115,28 +115,34 @@ function changeScene (scene) {
 function displayPuzzle (num) {
     gameCanvas.playingPuzzle = true;
     gameCanvas.puzzleChanged = true;
-    gameCanvas.puzzleNum = num;
     togglePortals();
+    console.log("displayPuzzle: num = " + num);
     
                 switch(gameCanvas.scene) {
 
                 case "red":
                     
                     gameCanvas.style.background = "#ff6347";
-                    switch(gameCanvas.puzzleNum) {
+                    switch(num) {
                     
                         case 1:
                             gameCanvas.puzzle = redPuzzle1;
+                            break;
                         case 2:
                             gameCanvas.puzzle = redPuzzle2;
+                            break;
                         case 3:
                             gameCanvas.puzzle = redPuzzle3;
+                            break;
                         case 4:
                             gameCanvas.puzzle = redPuzzle4;
+                            break;
                         case 5:
                             gameCanvas.puzzle = redPuzzle5;
+                            break;
                         case 6:
                             gameCanvas.puzzle = redPuzzle6;
+                            break;
                     }
                     break;
                 
@@ -160,6 +166,7 @@ function displayPuzzle (num) {
                     //Finnally, the Last Stuff
                     break;
             }
+            console.log("displayPuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
 }
 
 function removePuzzle () {
@@ -426,7 +433,6 @@ AM.downloadAll(function () {
     this.gameCanvas = document.getElementById("gameWorld");
     this.gameCanvas.scene = "intro";
     this.gameCanvas.playingPuzzle = false;
-    this.gameCanvas.puzzleNum = 0;
     this.gameCanvas.puzzle = {};
     this.gameCanvas.world = crystalWorld;
     var ctx = this.gameCanvas.getContext("2d");

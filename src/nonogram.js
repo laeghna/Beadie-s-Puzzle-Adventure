@@ -6,8 +6,6 @@ function Puzzle(game, puzzle, cellSize) {
     this.cellsHorizontal = puzzle.width;
     this.cellsVertical = puzzle.height;
     this.undoBuffer = []
-    
-    //this.paint = true;
         
     this.grid = this.buildGrid();
     this.finalGrid = puzzle.cells;
@@ -33,6 +31,7 @@ Puzzle.prototype.buildGrid = function() {
 }
 
 Puzzle.prototype.draw = function() {
+
     if (gameCanvas.playingPuzzle) {
         this.ctx.clearRect(0, 0, this.grid_width, this.grid_height);
     this.ctx.fillStyle = "rgba(34,34,34, 0.2)";
@@ -50,7 +49,6 @@ Puzzle.prototype.draw = function() {
         for(var i = 0; i <= this.grid[0].length; i++){
             this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 1);
             if(i % 5 == 0){
-                console.log("ssd");
                 this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 3);
             }
         }
@@ -179,6 +177,7 @@ Puzzle.prototype.gridComplete = function() {
 }
 
 Puzzle.prototype.changePuzzle = function() {
+    console.log("changePuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
     this.grid_width = gameCanvas.puzzle.width * this.cellSize;
     this.grid_height = gameCanvas.puzzle.height * this.cellSize;
     this.cellsHorizontal = gameCanvas.puzzle.width;
@@ -192,16 +191,18 @@ Puzzle.prototype.changePuzzle = function() {
 }
 
 Puzzle.prototype.update = function(){
+        
+    if (gameCanvas.playingPuzzle) {
+        if (gameCanvas.puzzleChanged) {
+            this.changePuzzle();
+            gameCanvas.puzzleChanged = false;
+        }
     
-    if (gameCanvas.puzzleChanged) {
-        this.changePuzzle();
-        gameCanvas.puzzleChanged = false;
-    }
-    
-    if (this.game.mouseClicked) {
-        console.log(this.game.mouse.x + ", " + this.game.mouse.y);
-        this.setClickAction(this.game.mouse.y, this.game.mouse.x);
-        this.click(this.game.mouse.y, this.game.mouse.x);
-        this.game.mouseClicked = false;
+        if (this.game.mouseClicked) {
+            console.log(this.game.mouse.x + ", " + this.game.mouse.y);
+            this.setClickAction(this.game.mouse.y, this.game.mouse.x);
+            this.click(this.game.mouse.y, this.game.mouse.x);
+            this.game.mouseClicked = false;
+        }
     }
 }
