@@ -1,9 +1,5 @@
 var AM = new AssetManager();
 
-$("#puzzle").on("click", "td", function(e) {
-    canvas.puzzle.solveToggleClass();
-})
-
 function Animation(spriteSheet, frameStart, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
     this.spriteSheet = spriteSheet;
     this.frameAdjust = frameStart;
@@ -54,113 +50,112 @@ Animation.prototype.changeAnimation = function (frameStart, frames) {
 }
 
 function startGame () {
-    canvas.scene = "crystal";
+    gameCanvas.scene = "crystal";
     clickToPlay.style.display = "none";
     togglePortals();
 }
 
 function changeScene (scene) {
-    canvas.scene = scene;
-    switch(canvas.scene) {
+    gameCanvas.scene = scene;
+    switch(gameCanvas.scene) {
 
         case "crystal":
-            canvas.world = crystalWorld;
-            hero.x = (canvas.width - CHAR_H) / 2;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            gameCanvas.world = crystalWorld;
+            hero.x = (gameCanvas.width - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
+            hero.direction = "E";
             break;
 
         case "red":
-            canvas.world = redWorld;
+            gameCanvas.world = redWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
 
         case "orange":
-            canvas.world = orangeWorld;
+            gameCanvas.world = orangeWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
 
         case "yellow":
-            canvas.world = yellowWorld;
+            gameCanvas.world = yellowWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
 
         case "green":
-            canvas.world = greenWorld;
+            gameCanvas.world = greenWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
 
         case "blue":
-            canvas.world = blueWorld;
+            gameCanvas.world = blueWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
 
         case "violet":
-            canvas.world = violetWorld;
+            gameCanvas.world = violetWorld;
             hero.x = 0;
-            hero.y = (canvas.height - CHAR_H) / 2;
+            hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
             break;
     }
-    canvas.world.clear();
+    gameCanvas.world.clear();
     togglePortals();
 }
 
 function displayPuzzle (num) {
-    //document.getElementById("puzzleCanvas").style.zIndex = "2";
-    canvas.playingPuzzle = true;
-    canvas.puzzleNum = num;
-    canvas.style.visibility = "hidden";
-    //document.getElementById("puzzle").style.zIndex = "2";
+    gameCanvas.playingPuzzle = true;
+    gameCanvas.puzzleChanged = true;
+    gameCanvas.puzzleNum = num;
     togglePortals();
-
-                switch(canvas.scene) {
+    
+                switch(gameCanvas.scene) {
 
                 case "red":
-
-                    switch(canvas.puzzleNum) {
-
+                    
+                    gameCanvas.style.background = "#ff6347";
+                    switch(gameCanvas.puzzleNum) {
+                    
                         case 1:
-                            console.log(redPuzzle1.clueRows);
-                            this.solvePuzzle("puzzle", redPuzzle1);
+                            gameCanvas.puzzle = redPuzzle1;
                         case 2:
-                            solvePuzzle("puzzle", redPuzzle2);
+                            gameCanvas.puzzle = redPuzzle2;
                         case 3:
-                            solvePuzzle("puzzle", redPuzzle3);
+                            gameCanvas.puzzle = redPuzzle3;
                         case 4:
-                            solvePuzzle("puzzle", redPuzzle4);
+                            gameCanvas.puzzle = redPuzzle4;
                         case 5:
-                            solvePuzzle("puzzle", redPuzzle5);
+                            gameCanvas.puzzle = redPuzzle5;
                         case 6:
-                            solvePuzzle("puzzle", redPuzzle1);
+                            gameCanvas.puzzle = redPuzzle6;
                     }
                     break;
-
+                
                 case "orange":
                     //Stuff
                     break;
-
+                
                 case "yellow":
                     //Yeah, More Stuff
                     break;
-
+                
                 case "green":
                     //Even More Stuff
                     break;
-
+                
                 case "blue":
                     //Will the Stuff Never End?!
                     break;
-
+                
                 case "violet":
                     //Finnally, the Last Stuff
                     break;
@@ -168,13 +163,12 @@ function displayPuzzle (num) {
 }
 
 function removePuzzle () {
-    document.getElementById("puzzleCanvas").style.zIndex = "-1";
-    canvas.playingPuzzle = false;
+    gameCanvas.playingPuzzle = false;
     togglePortals();
 }
 
 function togglePortals () {
-    if (canvas.scene === "crystal") {
+    if (gameCanvas.scene === "crystal") {
         redWorldPortal.style.display = "inline";
         orangeWorldPortal.style.display = "inline";
         yellowWorldPortal.style.display = "inline";
@@ -195,8 +189,8 @@ function togglePortals () {
         greenWorldPortal.style.display = "none";
         blueWorldPortal.style.display = "none";
         violetWorldPortal.style.display = "none";
-
-        if (canvas.playingPuzzle) {
+        
+        if (gameCanvas.playingPuzzle) {
             crystalWorldPortal.style.display = "none";
             puzzle1.style.display = "none";
             puzzle2.style.display = "none";
@@ -204,6 +198,7 @@ function togglePortals () {
             puzzle4.style.display = "none";
             puzzle5.style.display = "none";
             puzzle6.style.display = "none";
+            exit.style.display = "inline";
         } else {
             crystalWorldPortal.style.display = "inline";
             puzzle1.style.display = "inline";
@@ -212,6 +207,7 @@ function togglePortals () {
             puzzle4.style.display = "inline";
             puzzle5.style.display = "inline";
             puzzle6.style.display = "inline";
+            exit.style.display = "none";
         }
     }
 }
@@ -219,26 +215,26 @@ function togglePortals () {
 // no inheritance
 function Background(game, img) {
     this.tileset = AM.getAsset("./img/ProjectUtumno.png");
-    canvas.world.tiles = canvas.world.background;
+    gameCanvas.world.tiles = gameCanvas.world.background;
     this.game = game;
     this.img = img;
     this.ctx = game.ctx;
     this.tile = {w: TILE_W, h: TILE_H}; //size in pixels
-    this.cols = canvas.width/this.tile.w;
-    this.rows = canvas.height/this.tile.h;
+    this.cols = gameCanvas.width/this.tile.w;
+    this.rows = gameCanvas.height/this.tile.h;
 };
 
 Background.prototype.draw = function () {
 
-    if (canvas.scene == "intro") {
+    if (gameCanvas.scene == "intro") {
         this.ctx.drawImage(this.img, 0, 10, 1280, 732);
-    } else if (canvas.playingPuzzle) {
+    } else if (gameCanvas.playingPuzzle) {
         //Do nothing
     } else {
         for(var c = 0; c < this.cols; c++) {
             for(var r = 0; r < this.rows; r++) {
 
-                var tile = canvas.world.getTile(r * this.cols + c);
+                var tile = gameCanvas.world.getTile(r * this.cols + c);
 
                 this.ctx.drawImage(this.tileset,
                     tile.x, tile.y, this.tile.w, this.tile.h,
@@ -251,12 +247,12 @@ Background.prototype.draw = function () {
 
 Background.prototype.update = function () {
 
-    if (canvas.scene != "intro") {
-        if (canvas.playingPuzzle) {
+    if (gameCanvas.scene != "intro") {
+        if (gameCanvas.playingPuzzle) {
             //this.ctx.
-
+            
         } else {
-            canvas.world.update(this.cols, this.rows);
+            gameCanvas.world.update(this.cols, this.rows);
         }
     }
 };
@@ -265,8 +261,8 @@ Background.prototype.update = function () {
 function Poring(game, spritesheet) {
     this.animation = new Animation(spritesheet, E_START_STAND, CHAR_W, CHAR_H,
       SHEET_W, PORING_FRAME_DURATION, IDLE_FRAME_COUNT, true, CHAR_SCALE);
-    this.x = (canvas.width - CHAR_W) / 2;
-    this.y = (canvas.height - CHAR_H) / 2;
+    this.x = (gameCanvas.width - CHAR_W) / 2;
+    this.y = (gameCanvas.height - CHAR_H) / 2;
     this.speed = 1;
     this.direction = "E";
     this.moving = false;
@@ -281,135 +277,136 @@ function Poring(game, spritesheet) {
 }
 
 Poring.prototype.draw = function () {
-    if (canvas.scene != "intro") {
+    if (gameCanvas.scene != "intro" && !gameCanvas.playingPuzzle) {
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y - this.height, 1, 1);
     }
 }
 
 Poring.prototype.update = function () {
+    if (!gameCanvas.playingPuzzle) {
+        var okToMoveN = true, okToMoveS = true, okToMoveE = true, okToMoveW = true;
 
-    var okToMoveN = true, okToMoveS = true, okToMoveE = true, okToMoveW = true;
-
-    function getTile(x, y) {
-      return canvas.world.background[pixelToTile(x) + (pixelToTile(y) * 40)];
-    }
-
-    function getPos(x,y) {
-      return pixelToTile(x) + (pixelToTile(y) * 40);
-    }
-
-    function pixelToTile(n) {
-      return Math.floor(n/TILE_W);
-    } // pixel-to-tile conversion
-
-    function tileToPixel(n) {
-      return (n * TILE);
-    } // tile-to-pixel conversion
-
-    if (this.direction === "E"
-    && (!OK_TILES.includes(getTile(this.x + this.w + this.speed, this.y)) //topright
-    || !OK_TILES.includes(getTile(this.x + this.w + this.speed, this.y + this.h)))) { //bottomright
-      okToMoveE = false;
-      console.log("IT AINT OK TO MOVE E");
-    }//poring right vs tile left
-    if (this.direction === "S"
-    && (!OK_TILES.includes(getTile(this.x + this.w, this.y + this.h + this.speed)) //bottomright
-    || !OK_TILES.includes(getTile(this.x, this.y + this.h + this.speed)))) { //bottom left
-      okToMoveS = false;
-      console.log("IT AINT OK TO MOVE S");
-    }
-    if (this.direction === "N"
-    && (!OK_TILES.includes(getTile(this.x, this.y - this.speed)) //topleft
-    || !OK_TILES.includes(getTile(this.x + this.w, this.y - this.speed)))) { //topright
-      okToMoveN = false;
-      console.log("IT AINT OK TO MOVE N");
-    }
-    if (this.direction === "W"
-    && (!OK_TILES.includes(getTile(this.x - this.speed, this.y)) //topleft
-    || !OK_TILES.includes(getTile(this.x - this.speed, this.y + this.h)))) { //bottomleft
-      okToMoveW = false;
-      console.log("IT AINT OK TO MOVE W");
-    }
-
-
-    if (canvas.scene != "intro") {
-            if (this.game.moving != this.moving || this.game.direction != this.direction) {
-
-            this.statusChanged = true;
-            this.moving = this.game.moving;
-            this.direction = this.game.direction;
+        function getTile(x, y) {
+          return gameCanvas.world.background[pixelToTile(x) + (pixelToTile(y) * 40)];
         }
 
-        if (this.moving) {
+        function getPos(x,y) {
+          return pixelToTile(x) + (pixelToTile(y) * 40);
+        }
 
-            this.idleTimer = 1;
+        function pixelToTile(n) {
+          return Math.floor(n/TILE_W);
+        } // pixel-to-tile conversion
 
-            if (this.direction === "N" && this.y - this.speed > 0 && okToMoveN) {
+        function tileToPixel(n) {
+          return (n * TILE);
+        } // tile-to-pixel conversion
 
-                this.y -= SPEED;
-                if (this.statusChanged) {
-                    this.animation.changeAnimation(N_START_WALK, WALK_FRAME_COUNT);
-                    this.statusChanged = false;
-                }
+        if (this.direction === "E"
+        && (!OK_TILES.includes(getTile(this.x + this.w + this.speed, this.y)) //topright
+        || !OK_TILES.includes(getTile(this.x + this.w + this.speed, this.y + this.h)))) { //bottomright
+            okToMoveE = false;
+            console.log("IT AINT OK TO MOVE E");
+        }//poring right vs tile left
+        if (this.direction === "S"
+        && (!OK_TILES.includes(getTile(this.x + this.w, this.y + this.h + this.speed)) //bottomright
+        || !OK_TILES.includes(getTile(this.x, this.y + this.h + this.speed)))) { //bottom left
+            okToMoveS = false;
+            console.log("IT AINT OK TO MOVE S");
+        }
+        if (this.direction === "N"
+        && (!OK_TILES.includes(getTile(this.x, this.y - this.speed)) //topleft
+        || !OK_TILES.includes(getTile(this.x + this.w, this.y - this.speed)))) { //topright
+            okToMoveN = false;
+            console.log("IT AINT OK TO MOVE N");
+        }
+        if (this.direction === "W"
+        && (!OK_TILES.includes(getTile(this.x - this.speed, this.y)) //topleft
+        || !OK_TILES.includes(getTile(this.x - this.speed, this.y + this.h)))) { //bottomleft
+            okToMoveW = false;
+            console.log("IT AINT OK TO MOVE W");
+        }
 
-            } else if (this.direction === "W" && this.x - this.speed > 0 && okToMoveW) {
 
-                this.x -= SPEED;
-                if (this.statusChanged) {
-                    this.animation.changeAnimation(W_START_WALK, WALK_FRAME_COUNT);
-                    this.statusChanged = false;
-                }
+        if (gameCanvas.scene != "intro") {
+                if (this.game.moving != this.moving || this.game.direction != this.direction) {
 
-            } else if (this.direction === "S" && this.y + this.speed < 638 && okToMoveS) {
-
-                this.y += SPEED;
-                if (this.statusChanged) {
-                    this.animation.changeAnimation(S_START_WALK, WALK_FRAME_COUNT);
-                    this.statusChanged = false;
-                }
-
-            } else if (this.direction === "E" && this.x + this.speed < 1216 && okToMoveE) {
-
-                this.x += SPEED;
-                if (this.statusChanged) {
-                    this.animation.changeAnimation(E_START_WALK, WALK_FRAME_COUNT);
-                    this.statusChanged = false;
-                }
+                this.statusChanged = true;
+                this.moving = this.game.moving;
+                this.direction = this.game.direction;
             }
 
-            var jumpDistance = this.animation.elapsedTime / this.animation.totalTime;
-            var totalHeight = 2;
+            if (this.moving) {
 
-            if (jumpDistance > 0.6)
-                jumpDistance = -(1 - jumpDistance);
+                this.idleTimer = 1;
 
+                if (this.direction === "N" && this.y - this.speed > 0 && okToMoveN) {
 
-            this.height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
-
-        } else {
-
-            if (this.statusChanged) {
-                switch(this.direction) {
-
-                    case "N":
-                        this.animation.changeAnimation(N_START_STAND, IDLE_FRAME_COUNT);
+                    this.y -= SPEED;
+                    if (this.statusChanged) {
+                        this.animation.changeAnimation(N_START_WALK, WALK_FRAME_COUNT);
                         this.statusChanged = false;
-                        break;
+                    }
 
-                    case "W":
-                        this.animation.changeAnimation(W_START_STAND, IDLE_FRAME_COUNT);
-                        this.statusChanged = false;
-                        break;
+                } else if (this.direction === "W" && this.x - this.speed > 0 && okToMoveW) {
 
-                    case "S":
-                        this.animation.changeAnimation(S_START_STAND, IDLE_FRAME_COUNT);
+                    this.x -= SPEED;
+                    if (this.statusChanged) {
+                        this.animation.changeAnimation(W_START_WALK, WALK_FRAME_COUNT);
                         this.statusChanged = false;
-                        break;
+                    }
 
-                    case "E":
-                        this.animation.changeAnimation(E_START_STAND, IDLE_FRAME_COUNT);
+                } else if (this.direction === "S" && this.y + this.speed < 638 && okToMoveS) {
+
+                    this.y += SPEED;
+                    if (this.statusChanged) {
+                        this.animation.changeAnimation(S_START_WALK, WALK_FRAME_COUNT);
                         this.statusChanged = false;
-                        break;
+                    }
+
+                } else if (this.direction === "E" && this.x + this.speed < 1216 && okToMoveE) {
+
+                    this.x += SPEED;
+                    if (this.statusChanged) {
+                        this.animation.changeAnimation(E_START_WALK, WALK_FRAME_COUNT);
+                        this.statusChanged = false;
+                    }
+                }
+            
+                var jumpDistance = this.animation.elapsedTime / this.animation.totalTime;
+                var totalHeight = 2;
+    
+                if (jumpDistance > 0.6)
+                    jumpDistance = -(1 - jumpDistance);
+            
+            
+                this.height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
+
+            } else {
+
+                if (this.statusChanged) {
+                    switch(this.direction) {
+
+                        case "N":
+                            this.animation.changeAnimation(N_START_STAND, IDLE_FRAME_COUNT);
+                            this.statusChanged = false;
+                            break;
+
+                        case "W":
+                            this.animation.changeAnimation(W_START_STAND, IDLE_FRAME_COUNT);
+                            this.statusChanged = false;
+                            break;
+
+                        case "S":
+                            this.animation.changeAnimation(S_START_STAND, IDLE_FRAME_COUNT);
+                            this.statusChanged = false;
+                            break;
+
+                        case "E":
+                            this.animation.changeAnimation(E_START_STAND, IDLE_FRAME_COUNT);
+                            this.statusChanged = false;
+                            break;
+                    }
                 }
             }
         }
@@ -426,13 +423,13 @@ function getRandomInt(min, max) {
 }
 
 AM.downloadAll(function () {
-    this.canvas = document.getElementById("gameWorld");
-    this.canvas.scene = "intro";
-    this.canvas.playingPuzzle = false;
-    this.canvas.puzzleNum = null;
-    this.canvas.puzzle = {};
-    this.canvas.world = crystalWorld;
-    var ctx = this.canvas.getContext("2d");
+    this.gameCanvas = document.getElementById("gameWorld");
+    this.gameCanvas.scene = "intro";
+    this.gameCanvas.playingPuzzle = false;
+    this.gameCanvas.puzzleNum = 0;
+    this.gameCanvas.puzzle = {};
+    this.gameCanvas.world = crystalWorld;
+    var ctx = this.gameCanvas.getContext("2d");
 
     clickToPlay.style.display = "inline";
 
@@ -441,9 +438,10 @@ AM.downloadAll(function () {
     gameEngine.start();
 
     this.hero = new Poring(gameEngine, AM.getAsset("./img/poring.png"));
-
+    
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
     gameEngine.addEntity(hero);
+    gameEngine.addEntity(new Puzzle(gameEngine, redPuzzle1, CELL_SIZE));
 
     console.log("All Done!");
 });

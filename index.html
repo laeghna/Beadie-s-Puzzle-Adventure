@@ -7,12 +7,10 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/worlds.css">
     <link rel="stylesheet" type="text/css" href="css/puzzles.css">
-    <link rel="stylesheet" type="text/css" href="css/table.css">
     
     <!-- for FF, Chrome, Opera -->
     <link rel="icon" type = "image/png" href="img/poringIcon16.png" size="16x16" />
     <link rel="icon" type = "image/png" href="img/poringIcon32.png" size="32x32" />
-        <script type="text/javascript" src="./src/zepto.min.js"></script>
 </head>
 <body>
     <div id="canvas-holder">
@@ -31,6 +29,7 @@
                     <div id="blueWorldPortal" class="blueWorldPortal"><img src="img/portal.png" onclick="changeScene('blue')" /></div>
                     <div id="violetWorldPortal" class="violetWorldPortal"><img src="img/portal.png" onclick="changeScene('violet')" /></div>
                     <div id="crystalWorldPortal" class="crystalWorldPortal"><img src="img/portal.png" onclick="changeScene('crystal')" /></div>
+                    <div id="exit" class="exit"><img src="img/portal.png" onclick="removePuzzle()" /></div>
                     
         </div>
         
@@ -49,9 +48,6 @@
         <script type="text/javascript" src="./src/crystalWorld.js"></script>
         <script type="text/javascript" src="./src/constants.js"></script>
         
-
-            <table id="puzzle"></table>
-            <span id="clueObject"></span>
         <script type="text/javascript" src="./src/redWorldPuzzles.js"></script>
         <script type="text/javascript" src="./src/nonogram.js"></script>
     </div>

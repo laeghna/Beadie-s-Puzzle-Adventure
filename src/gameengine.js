@@ -52,7 +52,7 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     // event listeners are added here
-    this.ctx.canvas.addEventListener("click", function (e) {
+ /*   this.ctx.canvas.addEventListener("click", function (e) {
         that.click = getXandY(e);
         console.log(e);
         console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
@@ -63,13 +63,31 @@ GameEngine.prototype.startInput = function () {
         console.log(e);
         console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
         e.preventDefault();
-    }, false);
+    }, false);*/
 
+    this.ctx.canvas.addEventListener("mouseDown", function(e) {
+        console.log(e);
+        that.mouse = getXandY(e);
+        
+        that.mouseDown = true;
+        
+        e.preventDefault();
+    }, false);
+    
+        this.ctx.canvas.addEventListener("mouseUp", function(e) {
+        console.log(e);
+        that.mouse = getXandY(e);
+        
+        that.mouseDown = false;
+        
+        e.preventDefault();
+    }, false);
+    
     this.ctx.canvas.addEventListener("mousemove", function (e) {
         //console.log(e);
         that.mouse = getXandY(e);
     }, false);
-
+/*
     this.ctx.canvas.addEventListener("mousewheel", function (e) {
         console.log(e);
         that.wheel = e;
