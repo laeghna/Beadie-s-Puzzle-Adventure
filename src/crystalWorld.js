@@ -31,15 +31,20 @@ var crystalWorld = {
     ],
     tiles: [],
     crystalTimer: 0,
-    crystalFrameRate: 20,
-    crystalTileCount: 6,
-    crystal1x: 1248,
-    crystal2x: 1280,
-    crystal3x: 1312,
-    crystal4x: 1344,
-    crystalY: 608,
+    crystalFrameRate: 5,
+    crystalTileCount: 16,
+    crystal1x: 1184,
+    crystal2x: 1152,
+    crystal3x: 1120,
+    crystal4x: 1088,
+    crystal5x: 1056,
+    crystal6x: 1024,
+    crystal7x: 992,
+    crystal8x: 960,
+    crystalY: 320,
     crystalTrailX: 1472,
     crystalTrailY: 512,
+    counter: 50,
     
     update: updateCrystalWorld,
     getTile: getCrystalWorldTile,
@@ -48,9 +53,11 @@ var crystalWorld = {
 
 function updateCrystalWorld (cols, rows) {
     this.crystalTimer++;
-    if (this.crystalFrameRate % 21 === 0) {
+    if (this.counter === 50) {
         
-        var count = getRandomInt(1, 3);
+        this.counter = 0;
+        
+        var count = getRandomInt(1, 15);
         var col = 0; 
         var row = 0;
         var i = 0;
@@ -87,6 +94,7 @@ function updateCrystalWorld (cols, rows) {
             }
         }
     }
+    this.counter++;
 }
 
 function getCrystalWorldTile (index) {
@@ -101,27 +109,52 @@ function getCrystalWorldTile (index) {
         switch(this.tiles[index]) {
                 
                 case 1:
+                    return null;
+                    break;
+                case 2:
                     tile.x = this.crystal1x;
                     break;
-                
-                case 2:
+                case 3:
                     tile.x = this.crystal2x;
                     break;
-                
-                case 3:
+                case 4:
                     tile.x = this.crystal3x;
                     break;
-                
-                case 4:
+                case 5:
                     tile.x = this.crystal4x;
                     break;
-                
-                case 5:
+                case 6:
+                    tile.x = this.crystal5x;
+                    break;
+                case 7:
+                    tile.x = this.crystal6x;
+                    break;
+                case 8:
+                    tile.x = this.crystal7x;
+                    break;                
+                case 9:
+                    tile.x = this.crystal8x;
+                    break;
+                case 10:
+                    tile.x = this.crystal7x;
+                    break; 
+                case 11:
+                    tile.x = this.crystal6x;
+                    break; 
+                case 12:
+                    tile.x = this.crystal5x;
+                    break;
+                case 13:
+                    tile.x = this.crystal4x;
+                    break;
+                case 14:
                     tile.x = this.crystal3x;
                     break;
-                
-                case 6:
+                case 15:
                     tile.x = this.crystal2x;
+                    break;
+                case 16:
+                    tile.x = this.crystal1x;
                     break;
             }
             

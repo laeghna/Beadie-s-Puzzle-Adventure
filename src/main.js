@@ -50,6 +50,7 @@ Animation.prototype.changeAnimation = function (frameStart, frames) {
 }
 
 function startGame () {
+    gameCanvas.style.background = "rgb(34, 34, 34)";
     gameCanvas.scene = "crystal";
     clickToPlay.style.display = "none";
     togglePortals();
@@ -122,7 +123,7 @@ function displayPuzzle (num) {
 
                 case "red":
                     
-                    gameCanvas.style.background = "#ff6347";
+                    gameCanvas.style.background = "rgb(255, 99, 71)";
                     switch(num) {
                     
                         case 1:
@@ -147,29 +148,135 @@ function displayPuzzle (num) {
                     break;
                 
                 case "orange":
-                    //Stuff
+                    gameCanvas.style.background = "rgb(252, 189, 126)";/*
+                    switch(num) {
+                    
+                        case 1:
+                            gameCanvas.puzzle = orangePuzzle1;
+                            break;
+                        case 2:
+                            gameCanvas.puzzle = orangePuzzle2;
+                            break;
+                        case 3:
+                            gameCanvas.puzzle = orangePuzzle3;
+                            break;
+                        case 4:
+                            gameCanvas.puzzle = orangePuzzle4;
+                            break;
+                        case 5:
+                            gameCanvas.puzzle = orangePuzzle5;
+                            break;
+                        case 6:
+                            gameCanvas.puzzle = orangePuzzle6;
+                            break;
+                    }*/
                     break;
                 
                 case "yellow":
-                    //Yeah, More Stuff
+                    gameCanvas.style.background = "rgb(254, 255, 204)";/*
+                    switch(num) {
+                    
+                        case 1:
+                            gameCanvas.puzzle = yellowPuzzle1;
+                            break;
+                        case 2:
+                            gameCanvas.puzzle = yellowPuzzle2;
+                            break;
+                        case 3:
+                            gameCanvas.puzzle = yellowPuzzle3;
+                            break;
+                        case 4:
+                            gameCanvas.puzzle = yellowPuzzle4;
+                            break;
+                        case 5:
+                            gameCanvas.puzzle = yellowPuzzle5;
+                            break;
+                        case 6:
+                            gameCanvas.puzzle = yellowPuzzle6;
+                            break;
+                    }*/
                     break;
                 
                 case "green":
-                    //Even More Stuff
+                    gameCanvas.style.background = "rgb(161, 234, 194)";/*
+                    switch(num) {
+                    
+                        case 1:
+                            gameCanvas.puzzle = greenPuzzle1;
+                            break;
+                        case 2:
+                            gameCanvas.puzzle = greenPuzzle2;
+                            break;
+                        case 3:
+                            gameCanvas.puzzle = greenPuzzle3;
+                            break;
+                        case 4:
+                            gameCanvas.puzzle = greenPuzzle4;
+                            break;
+                        case 5:
+                            gameCanvas.puzzle = greenPuzzle5;
+                            break;
+                        case 6:
+                            gameCanvas.puzzle = greenPuzzle6;
+                            break;
+                    }*/
                     break;
                 
                 case "blue":
-                    //Will the Stuff Never End?!
+                    gameCanvas.style.background = "rgb(153, 190, 239)";/*
+                    switch(num) {
+                    
+                        case 1:
+                            gameCanvas.puzzle = bluePuzzle1;
+                            break;
+                        case 2:
+                            gameCanvas.puzzle = bluePuzzle2;
+                            break;
+                        case 3:
+                            gameCanvas.puzzle = bluePuzzle3;
+                            break;
+                        case 4:
+                            gameCanvas.puzzle = bluePuzzle4;
+                            break;
+                        case 5:
+                            gameCanvas.puzzle = bluePuzzle5;
+                            break;
+                        case 6:
+                            gameCanvas.puzzle = bluePuzzle6;
+                            break;
+                    }*/
                     break;
                 
                 case "violet":
-                    //Finnally, the Last Stuff
+                    gameCanvas.style.background = "rgb(201, 135, 255)";/*
+                    switch(num) {
+                    
+                        case 1:
+                            gameCanvas.puzzle = violetPuzzle1;
+                            break;
+                        case 2:
+                            gameCanvas.puzzle = violetPuzzle2;
+                            break;
+                        case 3:
+                            gameCanvas.puzzle = violetPuzzle3;
+                            break;
+                        case 4:
+                            gameCanvas.puzzle = violetPuzzle4;
+                            break;
+                        case 5:
+                            gameCanvas.puzzle = violetPuzzle5;
+                            break;
+                        case 6:
+                            gameCanvas.puzzle = violetPuzzle6;
+                            break;
+                    }*/
                     break;
             }
             console.log("displayPuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
 }
 
 function removePuzzle () {
+    gameCanvas.style.background = "rgb(34, 34, 34)";
     gameCanvas.playingPuzzle = false;
     togglePortals();
 }
@@ -243,10 +350,12 @@ Background.prototype.draw = function () {
 
                 var tile = gameCanvas.world.getTile(r * this.cols + c);
 
-                this.ctx.drawImage(this.tileset,
-                    tile.x, tile.y, this.tile.w, this.tile.h,
-                    c * this.tile.w, r * this.tile.h,
-                    this.tile.w, this.tile.h);
+                if (tile != null) {
+                    this.ctx.drawImage(this.tileset,
+                        tile.x, tile.y, this.tile.w, this.tile.h,
+                        c * this.tile.w, r * this.tile.h,
+                        this.tile.w, this.tile.h);
+                }
             }
         }
     }
