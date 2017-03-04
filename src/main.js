@@ -533,6 +533,12 @@ Poring.prototype.update = function () {
 AM.queueDownload("./img/title.png");
 AM.queueDownload("./img/ProjectUtumno.png");
 AM.queueDownload("./img/poring.png");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_1.jpg");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_2v7.jpg");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_3v4.jpg");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_4v2.jpg");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_5v1.jpg");
+AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_6v2.jpg");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max-min + 1)) + min;
