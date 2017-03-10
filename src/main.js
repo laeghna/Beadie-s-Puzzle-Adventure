@@ -70,7 +70,7 @@ function changeScene (scene) {
         case "red":
             gameCanvas.world = redWorld;
             hero.x = 0;
-            hero.y = (gameCanvas.height - CHAR_H) / 2;
+            hero.y = 7 * (gameCanvas.height - CHAR_H) / 8;
             hero.direction = "E";
             break;
 
@@ -98,7 +98,7 @@ function changeScene (scene) {
         case "blue":
             gameCanvas.world = blueWorld;
             hero.x = 0;
-            hero.y = (gameCanvas.height - CHAR_H) / 2;
+            hero.y = 7 * (gameCanvas.height - CHAR_H) / 8;
             hero.direction = "E";
             break;
 
