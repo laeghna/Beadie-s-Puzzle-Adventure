@@ -1,19 +1,7 @@
-function Puzzle(game, puzzle, cellSize) {
+function Puzzle(game) {
     this.game = game;
-    this.cellSize = cellSize;
-    this.grid_width = puzzle.width * cellSize;
-    this.grid_height = puzzle.height * cellSize;
-    this.cellsHorizontal = puzzle.width;
-    this.cellsVertical = puzzle.height;
-    this.undoBuffer = []
-        
-    this.grid = this.buildGrid();
-    this.finalGrid = puzzle.cells;
-    this.linesFilled = puzzle.clueRows
-    this.columnsFilled = puzzle.clueCols;
-    
-    this.ctx = game.ctx;
     this.mouseClicked = false;
+    this.ctx = game.ctx;
 }
 
 Puzzle.prototype.buildGrid = function() {
@@ -33,7 +21,18 @@ Puzzle.prototype.buildGrid = function() {
 Puzzle.prototype.draw = function() {
 
     if (gameCanvas.playingPuzzle) {
-        this.ctx.clearRect(0, 0, this.grid_width, this.grid_height);
+        this.ctx.drawImage(this.instr, gameCanvas.width - this.instr.width, gameCanvas.height - this.instr.height);
+        this.drawGrid();
+        
+        if (gameCanvas.scene === "red") {
+            this.drawHints();
+            this.markCells();
+        }
+    }
+}
+
+Puzzle.prototype.drawGrid = function() {
+    this.ctx.clearRect(0, 0, this.grid_width, this.grid_height);
     this.ctx.fillStyle = "rgba(34,34,34, 0.2)";
     this.ctx.fillRect(0, 0, this.grid_width, this.grid_height);
         
@@ -53,16 +52,17 @@ Puzzle.prototype.draw = function() {
             }
         }
     }
-    
-    // Draw hints
+}
+
+Puzzle.prototype.drawHints = function() {
     this.ctx.font = "15px 'courier new'";
     this.ctx.fillStyle = "rgba(34,34,34, 1.0)";
-    
-    // Line hints
-    for(var i = 0; i < this.linesFilled.length; i++){
+
+    // Row hints
+    for(var i = 0; i < this.rowsFilled.length; i++){
         var hint = " ";
-        for(var j = 0; j < this.linesFilled[i].length; j++){
-            hint += this.linesFilled[i][j] + "    ";
+        for(var j = 0; j < this.rowsFilled[i].length; j++){
+            hint += this.rowsFilled[i][j] + "    ";
         }
         this.ctx.fillText(hint, this.grid_width + 10, this.cellSize * ( i + 1 ) - 7);
     }
@@ -74,7 +74,9 @@ Puzzle.prototype.draw = function() {
             this.ctx.fillText(hint, this.cellSize * i + 5, this.grid_height + this.cellSize * ( j + 1 ) + 7);
         }
     }
-    
+}
+
+Puzzle.prototype.markCells = function() {
     this.ctx.fillStyle = "rgba(34,34,34, 1.0)";
     for(var i = 0; i < this.grid.length; i++){
         for(var j = 0; j < this.grid[i].length; j++){
@@ -90,7 +92,6 @@ Puzzle.prototype.draw = function() {
                 }
             }
         }
-    }
     }
 }
 
@@ -178,6 +179,8 @@ Puzzle.prototype.gridComplete = function() {
 
 Puzzle.prototype.changePuzzle = function() {
     console.log("changePuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
+    this.instr = gameCanvas.puzzleLayout.instr;
+    this.cellSize = CELL_SIZE;
     this.grid_width = gameCanvas.puzzle.width * this.cellSize;
     this.grid_height = gameCanvas.puzzle.height * this.cellSize;
     this.cellsHorizontal = gameCanvas.puzzle.width;
@@ -185,8 +188,8 @@ Puzzle.prototype.changePuzzle = function() {
     this.undoBuffer = []
         
     this.grid = this.buildGrid();
-    this.finalGrid = gameCanvas.puzzle.cells;
-    this.linesFilled = gameCanvas.puzzle.clueRows
+    this.finalGrid = gameCanvas.puzzle.solution;
+    this.rowsFilled = gameCanvas.puzzle.clueRows
     this.columnsFilled = gameCanvas.puzzle.clueCols;
 }
 

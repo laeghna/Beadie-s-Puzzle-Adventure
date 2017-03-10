@@ -1,3 +1,7 @@
+var yellowLayout = {
+    instr: AM.getAsset("./img/puzzleInstr/sudokuInstr.png")
+};
+
 var yellowPuzzle1 = {
     setup: [
     [2,0,0,3,0,0,0,0,0],
