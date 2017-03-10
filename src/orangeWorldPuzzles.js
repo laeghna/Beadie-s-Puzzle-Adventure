@@ -1,3 +1,7 @@
+var orangeLayout = {
+    instr: AM.getAsset("./img/puzzleInstr/sliderInstr.png")
+};
+/*
 var orangePuzzle1 = {
     img: AM.getAsset("./img/1725x2625_LEGO_Star_Wars_1.jpg"),
     setup: [
@@ -116,4 +120,4 @@ var orangePuzzle6 = {
     ],
     width: 1725,
     height: 2625
-};
+};*/

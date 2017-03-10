@@ -124,6 +124,7 @@ function displayPuzzle (num) {
                 case "red":
                     
                     gameCanvas.style.background = "rgb(255, 99, 71)";
+                    gameCanvas.puzzleLayout = redLayout;
                     switch(num) {
                     
                         case 1:
@@ -148,7 +149,8 @@ function displayPuzzle (num) {
                     break;
                 
                 case "orange":
-                    gameCanvas.style.background = "rgb(252, 189, 126)";/*
+                    gameCanvas.style.background = "rgb(252, 189, 126)";
+                    gameCanvas.puzzleLayout = orangeLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -173,7 +175,8 @@ function displayPuzzle (num) {
                     break;
                 
                 case "yellow":
-                    gameCanvas.style.background = "rgb(254, 255, 204)";/*
+                    gameCanvas.style.background = "rgb(254, 255, 204)";
+                    gameCanvas.puzzleLayout = yellowLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -198,7 +201,8 @@ function displayPuzzle (num) {
                     break;
                 
                 case "green":
-                    gameCanvas.style.background = "rgb(161, 234, 194)";/*
+                    gameCanvas.style.background = "rgb(161, 234, 194)";
+                    gameCanvas.puzzleLayout = greenLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -223,7 +227,8 @@ function displayPuzzle (num) {
                     break;
                 
                 case "blue":
-                    gameCanvas.style.background = "rgb(153, 190, 239)";/*
+                    gameCanvas.style.background = "rgb(153, 190, 239)";
+                    gameCanvas.puzzleLayout = blueLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -248,7 +253,8 @@ function displayPuzzle (num) {
                     break;
                 
                 case "violet":
-                    gameCanvas.style.background = "rgb(201, 135, 255)";/*
+                    gameCanvas.style.background = "rgb(201, 135, 255)";
+                    gameCanvas.puzzleLayout = violetLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -533,6 +539,12 @@ Poring.prototype.update = function () {
 AM.queueDownload("./img/title.png");
 AM.queueDownload("./img/ProjectUtumno.png");
 AM.queueDownload("./img/poring.png");
+AM.queueDownload("./img/puzzleInstr/nonoInstr.png");
+AM.queueDownload("./img/puzzleInstr/sliderInstr.png");
+AM.queueDownload("./img/puzzleInstr/sudokuInstr.png");
+AM.queueDownload("./img/puzzleInstr/rebusInstr.png");
+AM.queueDownload("./img/puzzleInstr/logicInstr.png");
+AM.queueDownload("./img/puzzleInstr/cryptoInstr.png");
 AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_1.jpg");
 AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_2v7.jpg");
 AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_3v4.jpg");
@@ -549,6 +561,7 @@ AM.downloadAll(function () {
     this.gameCanvas.scene = "intro";
     this.gameCanvas.playingPuzzle = false;
     this.gameCanvas.puzzle = {};
+    this.gameCanvas.puzzleLayout = {};
     this.gameCanvas.world = crystalWorld;
     var ctx = this.gameCanvas.getContext("2d");
 
@@ -562,7 +575,7 @@ AM.downloadAll(function () {
     
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/title.png")));
     gameEngine.addEntity(hero);
-    gameEngine.addEntity(new Puzzle(gameEngine, redPuzzle1, CELL_SIZE));
+    gameEngine.addEntity(new Puzzle(gameEngine));
 
     console.log("All Done!");
 });
