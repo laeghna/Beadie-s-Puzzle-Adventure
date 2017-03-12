@@ -1,10 +1,11 @@
 var orangeLayout = {
     instr: AM.getAsset("./img/puzzleInstr/sliderInstr.png"),
     cellSize: {x: 154, y: 140},
-    sectionSize: {x: 1, y: 1}
+    sectionSize: {x: 3, y: 5}
 };
 
 var orangePuzzle1 = {
+    name: "LEGO_Star_Wars_Ep1",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_1.jpg"),
     setup: [
     [7,13,11],
@@ -25,6 +26,7 @@ var orangePuzzle1 = {
 };
 
 var orangePuzzle2 = {
+    name: "LEGO_Star_Wars_Ep2",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_2v7.jpg"),
     setup: [
     [11,9,6],
@@ -45,6 +47,7 @@ var orangePuzzle2 = {
 };
 
 var orangePuzzle3 = {
+    name: "LEGO_Star_Wars_Ep3",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_3v4.jpg"),
     setup: [
     [14,8,4],
@@ -65,6 +68,7 @@ var orangePuzzle3 = {
 };
 
 var orangePuzzle4 = {
+    name: "LEGO_Star_Wars_Ep4",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_4v2.jpg"),
     setup: [
     [5,14,9],
@@ -85,6 +89,7 @@ var orangePuzzle4 = {
 };
 
 var orangePuzzle5 = {
+    name: "LEGO_Star_Wars_Ep5",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_5v1.jpg"),
     setup: [
     [6,4,13],
@@ -105,6 +110,7 @@ var orangePuzzle5 = {
 };
 
 var orangePuzzle6 = {
+    name: "LEGO_Star_Wars_Ep6",
     img: AM.getAsset("./img/sliderPuzzles/459x700_LEGO_Star_Wars_6v2.jpg"),
     setup: [
     [13,4,6],
