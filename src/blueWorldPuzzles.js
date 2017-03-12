@@ -1,5 +1,7 @@
 var blueLayout = {
-    instr: AM.getAsset("./img/puzzleInstr/logicInstr.png")
+    instr: AM.getAsset("./img/puzzleInstr/logicInstr.png"),
+    cellSize: {x: 32, y: 32},
+    sectionSize: {x: 5, y: 5}
 };
 
 var bluePuzzle1 = {

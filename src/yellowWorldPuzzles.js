@@ -1,5 +1,7 @@
 var yellowLayout = {
-    instr: AM.getAsset("./img/puzzleInstr/sudokuInstr.png")
+    instr: AM.getAsset("./img/puzzleInstr/sudokuInstr.png"),
+    cellSize: {x: 32, y: 32},
+    sectionSize: {x: 5, y: 5}
 };
 
 var yellowPuzzle1 = {

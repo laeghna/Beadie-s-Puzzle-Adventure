@@ -1,5 +1,7 @@
 var violetLayout = {
-    instr: AM.getAsset("./img/puzzleInstr/cryptoInstr.png")
+    instr: AM.getAsset("./img/puzzleInstr/cryptoInstr.png"),
+    cellSize: {x: 32, y: 32},
+    sectionSize: {x: 1, y: 1}
 };
 
 var violetPuzzle1 = {

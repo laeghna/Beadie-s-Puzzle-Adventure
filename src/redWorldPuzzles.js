@@ -1,5 +1,7 @@
 var redLayout = {
-    instr: AM.getAsset("./img/puzzleInstr/nonoInstr.png")
+    instr: AM.getAsset("./img/puzzleInstr/nonoInstr.png"),
+    cellSize: {x: 32, y: 32},
+    sectionSize: {x: 5, y: 5}
 };
 
 var redPuzzle1 = {
