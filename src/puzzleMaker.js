@@ -39,16 +39,16 @@ Puzzle.prototype.drawGrid = function() {
     // Draw grid lines
     if(!this.gridComplete()){
         for(var i = 0; i <= this.grid.length; i++){
-            this.drawLine(0, i*this.cellSize, this.grid_width, i*this.cellSize, "#1F1F1F", 1);
-            if(i % 5 == 0){
-                this.drawLine(0, i*this.cellSize, this.grid_width, i*this.cellSize, "#1F1F1F", 3);
+            this.drawLine(0, i * this.cellSize.y, this.grid_width, i * this.cellSize.y, "#1F1F1F", 1);
+            if(i % this.sectionSize.y == 0){
+                this.drawLine(0, i * this.cellSize.y, this.grid_width, i * this.cellSize.y, "#1F1F1F", 3);
             }
         }
         
         for(var i = 0; i <= this.grid[0].length; i++){
-            this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 1);
-            if(i % 5 == 0){
-                this.drawLine(i*this.cellSize, 0, i*this.cellSize, this.grid_height, "#1F1F1F", 3);
+            this.drawLine(i * this.cellSize.x, 0, i * this.cellSize.x, this.grid_height, "#1F1F1F", 1);
+            if(i % this.sectionSize.x == 0){
+                this.drawLine(i * this.cellSize.x, 0, i * this.cellSize.x, this.grid_height, "#1F1F1F", 3);
             }
         }
     }
@@ -64,14 +64,14 @@ Puzzle.prototype.drawHints = function() {
         for(var j = 0; j < this.rowsFilled[i].length; j++){
             hint += this.rowsFilled[i][j] + "    ";
         }
-        this.ctx.fillText(hint, this.grid_width + 10, this.cellSize * ( i + 1 ) - 7);
+        this.ctx.fillText(hint, this.grid_width + 10, this.cellSize.y * ( i + 1 ) - 7);
     }
     
     // Column hints    
     for(var i = 0; i < this.columnsFilled.length; i++){
         for(var j = 0; j < this.columnsFilled[i].length; j++){
             hint = this.columnsFilled[i][j];
-            this.ctx.fillText(hint, this.cellSize * i + 5, this.grid_height + this.cellSize * ( j + 1 ) + 7);
+            this.ctx.fillText(hint, this.cellSize.x * i + 5, this.grid_height + this.cellSize.y * ( j + 1 ) + 7);
         }
     }
 }
@@ -82,13 +82,13 @@ Puzzle.prototype.markCells = function() {
         for(var j = 0; j < this.grid[i].length; j++){
             // Draw blocks
             if(this.grid[i][j] == 1){
-                this.ctx.fillRect(this.cellSize * j, this.cellSize * i, this.cellSize, this.cellSize);   
+                this.ctx.fillRect(this.cellSize.x * j, this.cellSize.y * i, this.cellSize.x, this.cellSize.y);   
             }else if(!this.gridComplete()){
                 // Draw X's
                 if(this.grid[i][j] == 2){
                     //this.ctx.clearRect(this.cellSize * j, this.cellSize * i, this.cellSize, this.cellSize);  
-                    this.drawLine(this.cellSize*j, this.cellSize*i, this.cellSize*(j+1), this.cellSize*(i+1), "rgb(219, 112, 147)", 2);
-                    this.drawLine(this.cellSize*(j+1), this.cellSize*i, this.cellSize*j, this.cellSize*(i+1), "rgb(219, 112, 147)", 2);
+                    this.drawLine(this.cellSize.x * j, this.cellSize.y * i, this.cellSize.x * (j+1), this.cellSize.y * (i+1), "rgb(219, 112, 147)", 2);
+                    this.drawLine(this.cellSize.x * (j+1), this.cellSize.y * i, this.cellSize.x * j, this.cellSize.y * (i+1), "rgb(219, 112, 147)", 2);
                 }
             }
         }
@@ -126,7 +126,7 @@ Puzzle.prototype.click = function(row, col) {
 }
 
 Puzzle.prototype.isValidLocation = function(y, x) {
-    return (x >= 0 && x * this.cellSize < this.grid_width && y >=0 && y * this.cellSize < this.grid_height);
+    return (x >= 0 && x * this.cellSize.x < this.grid_width && y >=0 && y * this.cellSize.y < this.grid_height);
 }
 
 Puzzle.prototype.drawLine = function(startx, starty, endx, endy, color, line_width){
@@ -180,9 +180,10 @@ Puzzle.prototype.gridComplete = function() {
 Puzzle.prototype.changePuzzle = function() {
     console.log("changePuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
     this.instr = gameCanvas.puzzleLayout.instr;
-    this.cellSize = CELL_SIZE;
-    this.grid_width = gameCanvas.puzzle.width * this.cellSize;
-    this.grid_height = gameCanvas.puzzle.height * this.cellSize;
+    this.cellSize = gameCanvas.puzzleLayout.cellSize;
+    this.sectionSize = gameCanvas.puzzleLayout.sectionSize;
+    this.grid_width = gameCanvas.puzzle.width * this.cellSize.x;
+    this.grid_height = gameCanvas.puzzle.height * this.cellSize.y;
     this.cellsHorizontal = gameCanvas.puzzle.width;
     this.cellsVertical = gameCanvas.puzzle.height;
     this.undoBuffer = []
