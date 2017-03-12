@@ -51,9 +51,7 @@ body{
 
 .exit{
     opacity: 0.5;
-    position: absolute;
-    left: 300px;
-    top: 595px;
+    float: right;
     display: none;
 }
 
