@@ -45,6 +45,3 @@ var TILE_H = 32;
 
 //Acceptable tiles array
 var OK_TILES = [0];
-
-//Puzzle Cell Size
-var CELL_SIZE = 32;
