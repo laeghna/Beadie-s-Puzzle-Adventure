@@ -72,6 +72,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = 7 * (gameCanvas.height - CHAR_H) / 8;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(255, 99, 71)";
+            gameCanvas.puzzleLayout = redLayout;
             break;
 
         case "orange":
@@ -79,6 +81,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(252, 189, 126)";
+            gameCanvas.puzzleLayout = orangeLayout;
             break;
 
         case "yellow":
@@ -86,6 +90,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(254, 255, 204)";
+            gameCanvas.puzzleLayout = yellowLayout;
             break;
 
         case "green":
@@ -93,6 +99,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(161, 234, 194)";
+            gameCanvas.puzzleLayout = greenLayout;
             break;
 
         case "blue":
@@ -100,6 +108,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = 7 * (gameCanvas.height - CHAR_H) / 8;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(153, 190, 239)";
+            gameCanvas.puzzleLayout = blueLayout;
             break;
 
         case "violet":
@@ -107,6 +117,8 @@ function changeScene (scene) {
             hero.x = 0;
             hero.y = (gameCanvas.height - CHAR_H) / 2;
             hero.direction = "E";
+            gameCanvas.style.background = "rgb(201, 135, 255)";
+            gameCanvas.puzzleLayout = violetLayout;
             break;
     }
     gameCanvas.world.clear();
@@ -122,9 +134,6 @@ function displayPuzzle (num) {
                 switch(gameCanvas.scene) {
 
                 case "red":
-                    
-                    gameCanvas.style.background = "rgb(255, 99, 71)";
-                    gameCanvas.puzzleLayout = redLayout;
                     switch(num) {
                     
                         case 1:
@@ -149,8 +158,6 @@ function displayPuzzle (num) {
                     break;
                 
                 case "orange":
-                    gameCanvas.style.background = "rgb(252, 189, 126)";
-                    gameCanvas.puzzleLayout = orangeLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -171,12 +178,10 @@ function displayPuzzle (num) {
                         case 6:
                             gameCanvas.puzzle = orangePuzzle6;
                             break;
-                    }*/
+                    }
                     break;
                 
                 case "yellow":
-                    gameCanvas.style.background = "rgb(254, 255, 204)";
-                    gameCanvas.puzzleLayout = yellowLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -197,12 +202,10 @@ function displayPuzzle (num) {
                         case 6:
                             gameCanvas.puzzle = yellowPuzzle6;
                             break;
-                    }*/
+                    }
                     break;
                 
                 case "green":
-                    gameCanvas.style.background = "rgb(161, 234, 194)";
-                    gameCanvas.puzzleLayout = greenLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -223,12 +226,10 @@ function displayPuzzle (num) {
                         case 6:
                             gameCanvas.puzzle = greenPuzzle6;
                             break;
-                    }*/
+                    }
                     break;
                 
                 case "blue":
-                    gameCanvas.style.background = "rgb(153, 190, 239)";
-                    gameCanvas.puzzleLayout = blueLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -249,12 +250,10 @@ function displayPuzzle (num) {
                         case 6:
                             gameCanvas.puzzle = bluePuzzle6;
                             break;
-                    }*/
+                    }
                     break;
                 
                 case "violet":
-                    gameCanvas.style.background = "rgb(201, 135, 255)";
-                    gameCanvas.puzzleLayout = violetLayout;/*
                     switch(num) {
                     
                         case 1:
@@ -275,7 +274,7 @@ function displayPuzzle (num) {
                         case 6:
                             gameCanvas.puzzle = violetPuzzle6;
                             break;
-                    }*/
+                    }
                     break;
             }
             console.log("displayPuzzle: gameCanvas.puzzle.name = " + gameCanvas.puzzle.name);
@@ -545,12 +544,12 @@ AM.queueDownload("./img/puzzleInstr/sudokuInstr.png");
 AM.queueDownload("./img/puzzleInstr/rebusInstr.png");
 AM.queueDownload("./img/puzzleInstr/logicInstr.png");
 AM.queueDownload("./img/puzzleInstr/cryptoInstr.png");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_1.jpg");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_2v7.jpg");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_3v4.jpg");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_4v2.jpg");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_5v1.jpg");
-AM.queueDownload("./img/1725x2625_LEGO_Star_Wars_6v2.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_1.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_2v7.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_3v4.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_4v2.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_5v1.jpg");
+AM.queueDownload("./img/sliderPuzzles/459x700_LEGO_Star_Wars_6v2.jpg");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max-min + 1)) + min;
